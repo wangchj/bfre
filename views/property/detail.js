@@ -2,7 +2,7 @@
 var map;
 
 $(function(){
-   initMap();
+    initMap();
 });
 
 function initMap() {

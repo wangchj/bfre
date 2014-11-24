@@ -7,7 +7,7 @@ use app\assets\PropertyDetailAsset;
 /* @var $this yii\web\View */
 /* @var $property app\models\Property */
 
-PropertyDetailAsset::register($this);
+//PropertyDetailAsset::register($this);
 
 $this->title = $property->headline;
 $this->params['breadcrumbs'][] = ['label' => 'Properties', 'url' => ['index']];
@@ -23,7 +23,37 @@ $this->params['breadcrumbs'][] = $this->title;
     </div-->
 
     <div class="row">
-        <img class="col-sm-5" style="margin-top:20px" src="<?=getFirstPhotoUrl($property)?>" />
+        <div class="col-sm-5" style="margin-top:20px">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
+                <ol class="carousel-indicators" style="bottom:0px;margin-bottom:5px;opacity:0.75">
+                    <?php
+                    $photoUrls = getAllPhotoUrl($property);
+                    for($i = 0; $i < count($photoUrls); $i++):?>
+                    <li data-target="#carousel-example-generic" data-slide-to="<?=$i?>" <?php if($i == 0) echo 'class="active"'?>></li>
+                    <?php endfor;?>
+                </ol>
+                
+                <div class="carousel-inner" role="listbox">
+                    <?php
+                    $photoUrls = getAllPhotoUrl($property);
+                    for($i = 0; $i < count($photoUrls); $i++):?>
+                    <div class="item <?php if($i == 0) echo 'active'?>">
+                        <img src="<?php echo $photoUrls[$i]?>" />
+                    </div>
+                    <?php endfor;?>
+                </div>
+                
+                <!-- a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a -->
+            </div>
+        </div>
+
         <div class="col-sm-7" style="margin-top:20px"><table class="table table-striped">
         <?php if($property->address!=null):?><tr><th>Street Address</th><td><?=$property->address?></td></tr><?php endif;?>
         <tr><th>City</th><td><?=$property->city?></td></tr>
@@ -46,10 +76,10 @@ $this->params['breadcrumbs'][] = $this->title;
     </div></div>
     <?php endif;?>
 
-    <div class="row"><div class="col-sm-12" style="margin-top:20px">
+    <!-- div class="row"><div class="col-sm-12" style="margin-top:20px">
         <div style="border-bottom:1px dotted #AAA; margin-bottom:10px;font-size:16px">Location</div>
         <div id="map" style="width:100%;height:500px"></div>
-    </div></div>
+    </div></div -->
 
 
 </div>
@@ -66,5 +96,15 @@ function getFirstPhotoUrl($property)
         return null;
     $pos = strpos($property->pictures, "\n");
     return substr($property->pictures, 0, $pos);
+}
+
+/**
+ * Gets all photo url as an array of string.
+ */
+function getAllPhotoUrl($property)
+{
+    if($property == null || $property->pictures == null || $property->pictures == '')
+        return null;
+    return explode("\n", $property->pictures);
 }
 ?>
