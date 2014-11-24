@@ -7,7 +7,9 @@ var drawMode;
 
 var marker = null;
 var polygon = null;
-var pointArray = [];
+
+//Custom map controls
+var clearBoundButtn = null;
 
 $(function(){
    initMap();
@@ -20,42 +22,13 @@ function initMap() {
         center: new google.maps.LatLng(32.606, -85.481),
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        //mapTypeControl: false,
-        //panControl: false,
-        //streetViewControl: false,
-        //zoomControl: false
+        //mapTypeControl: false, panControl: false, streetViewControl: false, zoomControl: false
     };
+
     map = new google.maps.Map(document.getElementById("map"),
         myOptions);
 
-    //When updating an existing property
-    if(typeof pointStr != 'undefined' && pointStr != null && pointStr != '')
-    {
-        latlng = parseLatLng(pointStr);
-        map.setCenter(latlng);
-        marker = new google.maps.Marker({position:latlng, map:map});
-        $('#point').html(latlng.toUrlValue());
-    }
-    if(typeof boundStr != 'undefined' && boundStr != null && boundStr != '')
-    {
-        strs = boundStr.split(',');
-        a = [];
-        for(i = 0; i < strs.length; i++)
-            a.push(parseLatLng(strs[i]));
-
-        polygon = new google.maps.Polygon({
-            strokeColor: "#FFFF00",
-            strokeOpacity: 0.5,
-            strokeWeight: 1,
-            fillColor: "#FFFF00",
-            fillOpacity: 0.3,
-            //map: map,
-        });
-
-        polygon.setPath(a);
-        polygon.setMap(map);
-    }
-
+    loadMapOverlay();
     initMapControl();
 
     //Assign event handler for map click event.
@@ -78,24 +51,12 @@ function mapClick(event)
     }
     else //Assume boundMode
     {
-        pointArray.push(event.latLng);
         if(polygon == null)
-        /*pointArray = [
-            new google.maps.LatLng(32.610134,-85.483954),
-            new google.maps.LatLng(32.605001,-85.477989),
-            new google.maps.LatLng(32.603012,-85.486228),
-            new google.maps.LatLng(32.608146,-85.491078)
-        ];*/
-            polygon = new google.maps.Polygon({
-                strokeColor: "#FFFF00",
-                strokeOpacity: 0.5,
-                strokeWeight: 1,
-                fillColor: "#FFFF00",
-                fillOpacity: 0.3,
-                map: map,
-                //paths:pointArray
-            });
-        polygon.setPath(pointArray);
+            makeBoundPolygon();
+
+        polygon.getPath().push(event.latLng);
+
+        //Form data value
         var val = $('#property-bound').val();
         if(val != '')
             val = val + ',';
@@ -115,9 +76,59 @@ function initMapControl()
         .addClass('mapButton mapButtonActive').click(pointButtonClick);
     var boundButton = $('<div id="boundButton" style="padding-left:6px;padding-right:6px">Bounds</div>')
         .addClass('mapButton').click(boundButtonClick);
+    clearBoundButton = $('<div id="clearBoundButton" style="padding-left:6px;padding-right:6px">Clear</div>')
+        .addClass('mapButton').click(clearBoundButtonClick);
 
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(pointButton[0]);
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(boundButton[0]);
+}
+
+/**
+ * Load saved marker and polygon, if data exist.
+ */
+function loadMapOverlay()
+{
+    if(typeof pointStr != 'undefined' && pointStr != null && pointStr != '')
+    {
+        latlng = parseLatLng(pointStr);
+        map.setCenter(latlng);
+        marker = new google.maps.Marker({position:latlng, map:map});
+        $('#point').html(latlng.toUrlValue());
+    }
+    if(typeof boundStr != 'undefined' && boundStr != null && boundStr != '')
+    {
+        makeBoundPolygon();
+        strs = boundStr.split(',');
+        for(i = 0; i < strs.length; i++)
+            polygon.getPath().push(parseLatLng(strs[i]));
+    }
+}
+
+/**
+ * Create a new polygon with a color style, and set click event handler.
+ * @param path Array.<LatLng> or google.maps.MVCArray.<LatLng>. optional
+ * @return the polygon, which is already added to map.
+ */
+function makeBoundPolygon(path)
+{
+    polygon = new google.maps.Polygon({
+        strokeColor: "#FFFF00",
+        strokeOpacity: 0.5,
+        strokeWeight: 1,
+        fillColor: "#FFFF00",
+        fillOpacity: 0.3,
+        map: map,
+    });
+
+    //Polygon click handler
+    google.maps.event.addListener(polygon, 'click', mapClick);
+
+    //Check if path was passed in
+    if (typeof path != 'undefined' && path != null) {
+        polygon.setPath(path);
+    }
+
+    return polygon;
 }
 
 function pointButtonClick()
@@ -125,7 +136,8 @@ function pointButtonClick()
     drawMode = pointMode;
     $('#pointButton').addClass('mapButtonActive');
     $('#boundButton').removeClass('mapButtonActive');
-    map.controls[google.maps.ControlPosition.TOP_CENTER].pop();
+    if($.contains(document, clearBoundButton[0]))
+        map.controls[google.maps.ControlPosition.TOP_CENTER].pop();
 }
 
 function boundButtonClick()
@@ -133,18 +145,16 @@ function boundButtonClick()
     drawMode = boundMode;
     $('#pointButton').removeClass('mapButtonActive');
     $('#boundButton').addClass('mapButtonActive');
-    var clearBountButton = $('<div id="clearBoundButton" style="padding-left:6px;padding-right:6px">Clear</div>')
-        .addClass('mapButton').click(clearBoundButtonClick);
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(clearBountButton[0]);
+    if(!$.contains(document, clearBoundButton[0]))
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(clearBoundButton[0]);
 }
 
 function clearBoundButtonClick()
 {
     if(polygon != null)
     {
-        pointArray = [];
-        polygon.setMap(null);
-        polygon = null;
+        polygon.getPath().clear();
     }
+
     $('#property-bound').val('');
 }
