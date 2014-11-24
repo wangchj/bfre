@@ -7,7 +7,7 @@ use app\assets\PropertyDetailAsset;
 /* @var $this yii\web\View */
 /* @var $property app\models\Property */
 
-//PropertyDetailAsset::register($this);
+PropertyDetailAsset::register($this);
 
 $this->title = $property->headline;
 $this->params['breadcrumbs'][] = ['label' => 'Properties', 'url' => ['index']];
@@ -42,15 +42,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <?php endfor;?>
                 </div>
-                
-                <!-- a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a -->
             </div>
         </div>
 
@@ -76,10 +67,10 @@ $this->params['breadcrumbs'][] = $this->title;
     </div></div>
     <?php endif;?>
 
-    <!-- div class="row"><div class="col-sm-12" style="margin-top:20px">
+    <div class="row"><div class="col-sm-12" style="margin-top:20px">
         <div style="border-bottom:1px dotted #AAA; margin-bottom:10px;font-size:16px">Location</div>
         <div id="map" style="width:100%;height:500px"></div>
-    </div></div -->
+    </div></div>
 
 
 </div>
