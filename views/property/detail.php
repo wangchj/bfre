@@ -15,34 +15,41 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="property-view">
 
-    <div style="font-size:18px"><?= Html::encode($this->title) ?></div>
-    <div class="property_state">
+    <!-- div style="font-size:18px"><?= Html::encode($this->title) ?></div>
+    <div class="property_state" style="margin-bottom:20px">
         <?php if($property->address != null):?><?=$property->address?>,<?php endif;?>
         <?php if($property->city != null):?><?=$property->city?>,<?php endif;?>
         <?=$property->county?>, <?=$property->state?>
-    </div>
+    </div-->
 
-    <div style="margin-top:20px;float:left/*border:1px solid black;*/">
-        <img src="<?=getFirstPhotoUrl($property)?>" style="width:450px;float:left;margin-right:20px"/>
-        <table class="table table-striped" style="float:left;width:400px">
+    <div class="row">
+        <img class="col-sm-5" style="margin-top:20px" src="<?=getFirstPhotoUrl($property)?>" />
+        <div class="col-sm-7" style="margin-top:20px"><table class="table table-striped">
         <?php if($property->address!=null):?><tr><th>Street Address</th><td><?=$property->address?></td></tr><?php endif;?>
         <tr><th>City</th><td><?=$property->city?></td></tr>
         <tr><th>County</th><td><?=$property->county?></td></tr>
         <tr><th>State</th><td><?=$property->state?></td></tr>
         <tr><th>Size</th><td><?=$property->acres?> acres</td></tr>
         <tr><th>Price</th><td>$<?=number_format($property->price)?></td></tr>
-        </table>
+        </table></div>
     </div>
 
-    <div style="margin-top:20px;float:left">
-    <div style="border-bottom:1px dotted #AAA; margin-bottom:10px;font-size:16px">Description</div>
+    <div class="row"><div class="col-sm-12" style="margin-top:20px">
+        <div style="border-bottom:1px dotted #AAA; margin-bottom:10px;font-size:16px">Description</div>
         <?=nl2br($property->descr)?>
-    </div>
+    </div></div>
 
-    <div style="margin-top:20px;float:left;width:100%">
-    <div style="border-bottom:1px dotted #AAA; margin-bottom:10px;font-size:16px">Location</div>
+    <?php if($property->features != null):?>
+    <div class="row"><div class="col-sm-12" style="margin-top:20px">
+        <div style="border-bottom:1px dotted #AAA; margin-bottom:10px;font-size:16px">Special Features</div>
+        <?=nl2br($property->descr)?>
+    </div></div>
+    <?php endif;?>
+
+    <div class="row"><div class="col-sm-12" style="margin-top:20px">
+        <div style="border-bottom:1px dotted #AAA; margin-bottom:10px;font-size:16px">Location</div>
         <div id="map" style="width:100%;height:500px"></div>
-    </div>
+    </div></div>
 
 
 </div>
