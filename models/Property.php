@@ -65,7 +65,7 @@ class Property extends \yii\db\ActiveRecord
             'bound' => 'Bound',
             'headline' => 'Headline',
             'descr' => 'Description',
-            'features' => 'Features',
+            'features' => 'Special Features',
             'pictures' => 'Pictures',
             'acres' => 'Acres',
             'price' => 'Price',
