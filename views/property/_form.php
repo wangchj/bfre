@@ -15,7 +15,7 @@ AddPropertyAsset::register($this);
 
 <div class="property-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options'=>['class'=>'dropzone','enctype'=>'multipart/form-data']]); ?>
 
     <h2>Description</h2>
 
@@ -49,9 +49,6 @@ AddPropertyAsset::register($this);
 
     <div id="map" style="width:100%;height:500px"></div>
     
-    <!-- ?= $form->field($model, 'bound')->textInput() ? -->
-
-    
     <?php
         $field = $form->field($model, 'bound');
         $field->template = '{input}';
@@ -59,15 +56,35 @@ AddPropertyAsset::register($this);
     ?>
     
 
+    <h2>Pictures</h2>
+
+    <!-- ?= $form->field($model, 'pictures')->textarea(['rows' => 6]) ? -->
+
+    <div class="row">
+    <input type="hidden" id="droplist" name="droplist" />
+    <?php
+    //If this is an existing record, load the photos
+    if(!$model->isNewRecord && $model->pictures != null && $model->pictures != ''):
+        $photoUrls = explode("\n", $model->pictures);
+        for($i = 0; $i < count($photoUrls); $i++):
+    ?>
+        <div class="photo col-sm-2" id="photo<?=$i?>">
+            <div class="thumbnail">
+                <img src="<?=$photoUrls[$i]?>" />
+                <div class="caption" style="text-align:center">
+                    <div class="photo-remove btn btn-default btn-sm" data-id="<?=$i?>" role="button">remove</div>
+                </div>
+            </div>
+        </div>
+    <?php endfor; endif;?>
+    </div>
+
+    <!-- MAX_FILE_SIZE must precede the file input field -->
+    <!-- input type="hidden" name="MAX_FILE_SIZE" value="30000" / -->
+    <input type="file" name="uploads[]" multiple="multiple" />
     
 
-    <?= $form->field($model, 'pictures')->textarea(['rows' => 6]) ?>
-
-    
-
-    
-
-    <div class="form-group">
+    <div class="form-group" style="margin-top:35px">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 

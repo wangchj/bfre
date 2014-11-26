@@ -12,7 +12,7 @@ var polygon = null;
 var clearBoundButtn = null;
 
 $(function(){
-   initMap();
+    initMap();
 });
 
 function initMap() {

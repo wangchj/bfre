@@ -24,7 +24,8 @@ class AddPropertyAsset extends AssetBundle
     [
         'https://maps.googleapis.com/maps/api/js?key=AIzaSyCPBfmojGyNxx_egxYm1uNr_Lb7Vu5Yvgs&libraries=geometry&sensor=false',
         'map_helper.js',
-        'form.js'
+        'form.js',
+        'form_photo.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

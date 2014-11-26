@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\helpers\Url;
 use app\models\Property;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -90,13 +91,15 @@ class PropertyController extends Controller
     {
         $model = new Property();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->propId]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post()))
+        {
+            $this->addPhoto($model);
+
+            if($model->save())
+                return $this->redirect(['view', 'id' => $model->propId]);
         }
+        
+        return $this->render('create', ['model' => $model]); 
     }
 
     /**
@@ -109,13 +112,66 @@ class PropertyController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->propId]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post()))
+        {
+            $this->dropPhoto($model);
+            $this->addPhoto($model);
+
+            if($model->save())
+                return $this->redirect(['view', 'id' => $model->propId]);
         }
+
+        return $this->render('update', ['model' => $model]);
+    }
+
+    /**
+     * Process file upload. Overwrite if file already exist.
+     * @param $property an Property instance.
+     */
+    private function addPhoto($property)
+    {
+        if(!$_FILES)
+            return;
+
+        $files = $_FILES['uploads'];
+
+        //Create directory for photos
+        $uniqid  = uniqid();
+        $dirPath = Yii::getAlias('@webroot/photos/' . $uniqid);
+        $dirUrl  = Url::to('@web/photos/' . $uniqid);
+
+        mkdir($dirPath);
+
+        foreach($files['name'] as $index => $name)
+        {
+            if(!$files['error'][$index] && move_uploaded_file($files['tmp_name'][$index], "{$dirPath}/{$name}"))
+            {
+                if($property->pictures != null && $property->pictures != '')
+                    $property->pictures .= "\n";
+                $property->pictures .= "{$dirUrl}/{$name}";
+            }
+        }
+    }
+
+    /**
+     * Process drop list from POST
+     * @param $property an Property model object.
+     */
+    private function dropPhoto($property)
+    {
+        //If nothing to drop, do nothing
+        if(!isset($_POST['droplist']) || $_POST['droplist'] == '')
+            return;
+
+        $dropList = explode(',', $_POST['droplist']);
+        $fromList = explode("\n", $property->pictures);
+        sort($dropList);
+        for($i = count($dropList) - 1; $i >= 0; $i--)
+            unset($fromList[$dropList[$i]]);
+        
+        //TODO: physically remove photo from disk
+
+        $property->pictures = implode("\n", $fromList);
     }
 
     /**
