@@ -37,9 +37,24 @@ class PropertyController extends Controller
 
     /**
      * Lists all Property models.
+     * @param $typeId integer
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($typeId = null)
+    {
+        $activeQuery = Property::find();
+
+        if($typeId != null)
+            $activeQuery->where(['typeId'=>$typeId]);
+
+        return $this->render('list', ['properties' => $activeQuery->all()]);
+    }
+
+    /**
+     * Lists all Property models.
+     * @return mixed
+     */
+    public function actionGrid()
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Property::find(),
@@ -55,7 +70,7 @@ class PropertyController extends Controller
      * @param $typeId integer
      * @return mixed
      */
-    public function actionList($typeId = null)
+    /*public function actionList($typeId = null)
     {
         $activeQuery = Property::find();
 
@@ -63,7 +78,7 @@ class PropertyController extends Controller
             $activeQuery->where(['typeId'=>$typeId]);
 
         return $this->render('list', ['properties' => $activeQuery->all()]);
-    }
+    }*/
 
     /**
      * Displays a single Property model.

@@ -35,14 +35,14 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Farming', 'url' => ['/property/list', 'typeId'=>1]],
-                    ['label' => 'Hunting', 'url' => ['/property/list', 'typeId'=>2]],
-                    ['label' => 'Timber', 'url' => ['/property/list', 'typeId'=>3]],
-                    ['label' => 'Development', 'url' => ['/property/list', 'typeId'=>4]],
-                    ['label' => 'Industrial', 'url' => ['/property/list', 'typeId'=>5]],
-                    ['label' => 'Commercial', 'url' => ['/property/list', 'typeId'=>6]],
-                    ['label' => 'Income', 'url' => ['/property/list', 'typeId'=>7]],
-                    ['label' => 'Investment', 'url' => ['/property/list', 'typeId'=>8]],
+                    ['label' => 'Farming', 'url' => ['/property/index', 'typeId'=>1]],
+                    ['label' => 'Hunting', 'url' => ['/property/index', 'typeId'=>2]],
+                    ['label' => 'Timber', 'url' => ['/property/index', 'typeId'=>3]],
+                    ['label' => 'Development', 'url' => ['/property/index', 'typeId'=>4]],
+                    ['label' => 'Industrial', 'url' => ['/property/index', 'typeId'=>5]],
+                    ['label' => 'Commercial', 'url' => ['/property/index', 'typeId'=>6]],
+                    ['label' => 'Income', 'url' => ['/property/index', 'typeId'=>7]],
+                    ['label' => 'Investment', 'url' => ['/property/index', 'typeId'=>8]],
                     [
                         'label' => Yii::$app->user->isGuest ? '' : 'Logout (' . Yii::$app->user->identity->fname . ')',
                         'url' => ['/site/logout'],
