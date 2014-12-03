@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * PropertyTypeController implements the CRUD actions for PropertyType model.
@@ -17,6 +18,12 @@ class PropertyTypeController extends Controller
     public function behaviors()
     {
         return [
+            'access'=>[
+                'class'=>AccessControl::className(),
+                'rules'=>[
+                    ['allow'=>true, 'actions'=>['index','create','update','delete','view'], 'roles'=>['@']],
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\User;
 
 class SiteController extends Controller
 {
@@ -58,14 +59,16 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        $form = new LoginForm();
+        $form->load(Yii::$app->request->post());
+        $user = User::findOne(['email'=>$form->email]);
+        if($user != null && password_verify($form->password, $user->phash))
+        {
+            Yii::$app->user->login($user, $form->rememberMe ? 3600*24*30 : 0);
             return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
         }
+        else
+            return $this->render('login', ['model' => $form,]);
     }
 
     public function actionLogout()

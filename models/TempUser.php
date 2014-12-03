@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Users".
+ * This is the model class for table "TempUsers".
  *
  * @property integer $userId
  * @property string $email
@@ -14,14 +14,14 @@ use Yii;
  * @property string $lname
  * @property string $authKey
  */
-class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+class TempUser extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'Users';
+        return 'TempUsers';
     }
 
     /**
@@ -51,45 +51,5 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'lname' => 'Last Name',
             'authKey' => 'Auth Key',
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentity($id)
-    {
-        return self::findOne(['userId'=>$id]);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getAuthKey()
-    {
-        return $this->authKey;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->authKey === $authKey;
     }
 }

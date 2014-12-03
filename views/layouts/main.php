@@ -43,12 +43,12 @@ AppAsset::register($this);
                     ['label' => 'Commercial', 'url' => ['/property/list', 'typeId'=>6]],
                     ['label' => 'Income', 'url' => ['/property/list', 'typeId'=>7]],
                     ['label' => 'Investment', 'url' => ['/property/list', 'typeId'=>8]],
-                    
-                    /*Yii::$app->user->isGuest ?
-                        ['label' => 'Login', 'url' => ['/site/login']] :
-                        ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                            'url' => ['/site/logout'],
-                            'linkOptions' => ['data-method' => 'post']],*/
+                    [
+                        'label' => Yii::$app->user->isGuest ? '' : 'Logout (' . Yii::$app->user->identity->fname . ')',
+                        'url' => ['/site/logout'],
+                        'linkOptions' => ['data-method' => 'post'],
+                        'visible' => !Yii::$app->user->isGuest
+                    ],
                 ],
             ]);
             NavBar::end();
