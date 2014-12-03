@@ -32,22 +32,17 @@ create table Properties (
 create table TempUsers (
     userId   integer primary key auto_increment,
     email    varchar(50) not null unique,
-    phash    text not null, --password hash with salt appended
+    phash    text not null, -- password hash with salt appended
     fname    varchar(30) not null,
     lname    varchar(30) not null,
-    authKey  text not null  --Yii Framework authentication key
+    authKey  text not null  -- Yii Framework authentication key
 );
 
 create table Users (
     userId   integer primary key auto_increment,
     email    varchar(50) not null unique,
-    phash    text not null, --password hash with salt appended
+    phash    text not null, -- password hash with salt appended
     fname    varchar(30) not null,
     lname    varchar(30) not null,
-    authKey  text not null  --Yii Framework authentication key
+    authKey  text not null  -- Yii Framework authentication key
 );
-
-/**
- * Test data
- */
-
