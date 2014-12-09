@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Property */
 
-$this->title = 'Update Property: ' . ' ' . $model->propId;
+$this->title = "Update '{$model->headline}'";
 $this->params['breadcrumbs'][] = ['label' => 'Properties', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->propId, 'url' => ['view', 'id' => $model->propId]];
 $this->params['breadcrumbs'][] = 'Update';

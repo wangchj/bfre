@@ -71,4 +71,9 @@ class Property extends \yii\db\ActiveRecord
             'price' => 'Price',
         ];
     }
+
+    public function getType()
+    {
+        return $this->hasOne(PropertyType::className(), ['typeId'=>'typeId']);
+    }
 }

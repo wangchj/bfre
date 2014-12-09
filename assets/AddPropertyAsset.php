@@ -15,7 +15,7 @@ use yii\web\AssetBundle;
  */
 class AddPropertyAsset extends AssetBundle
 {
-    public $sourcePath = '@app/views/property';
+    public $sourcePath = '@app/modules/admin/views/property';
     public $css =
     [
         'form.css'

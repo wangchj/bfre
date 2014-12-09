@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Property */
 
-$this->title = $model->propId;
+$this->title = $model->headline;
 $this->params['breadcrumbs'][] = ['label' => 'Properties', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+        <?= Html::a('User View', ['/property/detail', 'id' => $model->propId], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Update', ['update', 'id' => $model->propId], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->propId], [
             'class' => 'btn btn-danger',
@@ -29,19 +30,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'propId',
-            'typeId',
+            ['label'=>'Type', 'value'=>$model->type->typeName],
+            'headline',
+            'descr:ntext',
+            'features:ntext',
             'address',
             'city',
             'county',
             'state',
+            'pictures:ntext',
             'latlon',
             'bound',
-            'headline',
-            'descr:ntext',
-            'features:ntext',
-            'pictures:ntext',
-            'acres',
-            'price',
+            ['attribute'=>'acres', 'value'=>number_format($model->acres,2)],
+            ['attribute'=>'price', 'value'=>'$' . number_format($model->price)],
         ],
     ]) ?>
 
