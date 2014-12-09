@@ -12,5 +12,6 @@ class Module extends \yii\base\Module
 
         $this->layoutPath = __DIR__ . '/views/layouts';
         $this->layout = 'main.php';
+        $this->defaultRoute = 'property';
     }
 }

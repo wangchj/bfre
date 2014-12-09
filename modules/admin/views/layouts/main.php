@@ -35,14 +35,9 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Properties', 'url' => ['/property/index', 'typeId'=>1]],
-                    ['label' => 'Property Types', 'url' => ['/property/index', 'typeId'=>2]],
-                    ['label' => 'Users', 'url' => ['/property/index', 'typeId'=>3]],
-                    //['label' => 'Development', 'url' => ['/property/index', 'typeId'=>4]],
-                    //['label' => 'Industrial', 'url' => ['/property/index', 'typeId'=>5]],
-                    //['label' => 'Commercial', 'url' => ['/property/index', 'typeId'=>6]],
-                    //['label' => 'Income', 'url' => ['/property/index', 'typeId'=>7]],
-                    //['label' => 'Investment', 'url' => ['/property/index', 'typeId'=>8]],
+                    ['label' => 'Properties', 'url' => ['property/index']],
+                    ['label' => 'Property Types', 'url' => ['property-type/index']],
+                    ['label' => 'Users', 'url' => ['user/index']],
                     [
                         'label' => Yii::$app->user->isGuest ? '' : 'Logout (' . Yii::$app->user->identity->fname . ')',
                         'url' => ['/site/logout'],
