@@ -22,7 +22,8 @@ class UserController extends Controller
             'access'=>[
                 'class'=>AccessControl::className(),
                 'rules'=>[
-                    ['allow'=>true, 'actions'=>['index','create','update','delete','view'], 'roles'=>['@']],
+                    ['allow'=>true, 'actions'=>['signup'], 'roles'=>['?','@']],
+                    ['allow'=>true, 'actions'=>['activate','index','create','update','delete','view'], 'roles'=>['@']],
                 ]
             ],
             'verbs' => [
