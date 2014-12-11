@@ -1,51 +1,105 @@
 <?php
+use app\models\PropertyType;
+use app\assets\HomeAsset;
+use yii\helpers\Url;
+use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
+
 /* @var $this yii\web\View */
-$this->title = 'My Yii Application';
+$this->title = Yii::$app->name . ' Home';
+
+/* @var $this yii\web\View */
+/* @var $property app\models\Property */
+
+HomeAsset::register($this);
 ?>
-<div class="site-index">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
+<!-- link href="http://billfowlerrealestate.com/land_agent_web/css/style.css" rel="stylesheet" type="text/css" media="all" / -->
+<!-- link href='http://fonts.googleapis.com/css?family=Baumans' rel='stylesheet' type='text/css' -->
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
+<div style="width:100%;
+    /*height:400px;*/
+    /*margin-top:70px;*/
+    padding:20px 0px;
+    background-color:#565249;">
 
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12">
+    <div class="img-thumbnail">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="10000">
+        <ol class="carousel-indicators" style="bottom:0px;margin-bottom:5px;opacity:0.75">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>   
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active" style="overflow:hidden">
+                <img src="http://billfowlerrealestate.com/land_agent_web/images/slider1.jpg" />
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+            <div class="item" style="overflow:hidden">
+                <img src="http://billfowlerrealestate.com/land_agent_web/images/slider2.jpg" />
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+            <div class="item" style="overflow:hidden">
+                <img src="http://billfowlerrealestate.com/land_agent_web/images/slider3.jpg" />
             </div>
         </div>
-
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
 </div>
+
+
+<div class="container" style="padding-top:0px">
+    <div class="row">
+        <div class="col-sm-9" style="color: rgb(214, 213, 186);">
+            <h2>Welcome</h2>
+
+                <p>
+                Bill Fowler Real Estate operates in the Southeaster United Sates and specializes in Land, Commercial, and 1031 Tax-Differed Exchanges. With more than four decades in the business, the company has experienced the full spectrum of issues involved in every aspect of real estate transactions, some of which were extremely complicated.
+                </p>
+                <p>
+                Our company has been successful in transactions that involved numerous entities with diverse goals. Succeeding where other have been unable to craft a deal that satisfies everyone continues to be a hallmark of the company.
+                </p>
+                <p>
+                We provide personal care with absolute integrity; and as such is the go-to organization for both sellers and buyers who look for professional high-energy and dedicated expertise that will result in a successful conclusion to their real estate desires or problems.
+                </p>
+
+        </div>
+
+        <div class="col-sm-3">
+
+        <h3>Search</h3>
+
+        <form action="<?=Url::to(['property/index'])?>">
+
+            <label class="label-light" for="property-acres">Acres</label>
+            <div class="row" style="margin-bottom:10px">
+                <div class="col-sm-6"><input type="text" name="minAcres" class="form-control control-light" placeholder="Min acres"></div>
+                <div class="col-sm-6"><input type="text" name="maxAcres" class="form-control control-light" placeholder="Max acres"></div>
+            </div>
+
+            <label class="label-light" for="property-acres">Price</label>
+            <div class="row" style="margin-bottom:10px">
+                <div class="col-sm-6"><input type="text" name="minPrice" class="form-control control-light" placeholder="Min price"></div>
+                <div class="col-sm-6"><input type="text" name="maxPrice" class="form-control control-light" placeholder="Max price"></div>
+            </div>
+
+            <label class="label-light" for="property-acres">Type</label>
+            <?php
+                $items = ArrayHelper::map(PropertyType::find()->all(), 'typeId', 'typeName');
+                $items[''] = 'All';
+                echo Html::dropDownList('typeId', '', $items, ['class'=>'form-control control-light']);
+            ?>
+
+            <br/>
+            <button type="submit" class="btn btn-primary control-light">Search</button>
+            
+        </form>
+        </div>
+    </div>
+</div>
+

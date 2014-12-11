@@ -4,11 +4,13 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\assets\LayoutAsset;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
 AppAsset::register($this);
+LayoutAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -26,23 +28,19 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'Bill Fowler Real-Estate',
+                'brandLabel' => '<span style="font-size:1.2em">B</span>ill <span style="font-size:1.2em">F</span>owler <span style="font-size:1.2em">R</span>eal <span style="font-size:1.2em">E</span>state',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
+                    'class' => 'navbar-ana',
                 ],
             ]);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Farming', 'url' => ['/property/index', 'typeId'=>1]],
-                    ['label' => 'Hunting', 'url' => ['/property/index', 'typeId'=>2]],
-                    ['label' => 'Timber', 'url' => ['/property/index', 'typeId'=>3]],
-                    ['label' => 'Development', 'url' => ['/property/index', 'typeId'=>4]],
-                    ['label' => 'Industrial', 'url' => ['/property/index', 'typeId'=>5]],
-                    ['label' => 'Commercial', 'url' => ['/property/index', 'typeId'=>6]],
-                    ['label' => 'Income', 'url' => ['/property/index', 'typeId'=>7]],
-                    ['label' => 'Investment', 'url' => ['/property/index', 'typeId'=>8]],
+                    ['label' => 'Home', 'url' => ['site/index']],
+                    ['label' => 'About', 'url' => ['site/about']],
+                    ['label' => 'Properties', 'url' => ['property/index']],
+                    ['label' => 'Contact', 'url' => ['site/contact']],
                     [
                         'label' => Yii::$app->user->isGuest ? '' : 'Logout (' . Yii::$app->user->identity->fname . ')',
                         'url' => ['/site/logout'],
@@ -54,17 +52,13 @@ AppAsset::register($this);
             NavBar::end();
         ?>
 
-        <div class="container">
-            <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
-            <?= $content ?>
-        </div>
+        <?= $content ?>
+        
     </div>
 
-    <footer class="footer">
+    <footer class="footer footer-ana" style="border:0px">
         <div class="container">
-            <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+            <p class="pull-left">&copy; Bill Fowler Real Estate <?= date('Y') ?></p>
             <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>

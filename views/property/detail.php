@@ -9,11 +9,9 @@ use app\assets\PropertyDetailAsset;
 
 PropertyDetailAsset::register($this);
 
-$this->title = $property->headline;
-$this->params['breadcrumbs'][] = ['label' => 'Properties', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = Yii::$app->name . ' property';
 ?>
-<div class="property-view">
+<div class="container" style="padding-top:0px">
 
     <!-- div style="font-size:18px"><?= Html::encode($this->title) ?></div>
     <div class="property_state" style="margin-bottom:20px">
@@ -22,8 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <?=$property->county?>, <?=$property->state?>
     </div-->
 
+<h2><?=$property->headline?></h2>
+
     <div class="row">
-        <div class="col-sm-5" style="margin-top:20px">
+        <div class="col-sm-6" style="margin-top:20px">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
                 <ol class="carousel-indicators" style="bottom:0px;margin-bottom:5px;opacity:0.75">
                     <?php
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
 
-        <div class="col-sm-7" style="margin-top:20px"><table class="table table-striped">
+        <div class="col-sm-6" style="margin-top:20px"><table class="table">
         <?php if($property->address!=null):?><tr><th>Street Address</th><td><?=$property->address?></td></tr><?php endif;?>
         <tr><th>City</th><td><?=$property->city?></td></tr>
         <tr><th>County</th><td><?=$property->county?></td></tr>

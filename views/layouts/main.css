@@ -1,0 +1,82 @@
+body
+{
+    background-color: #5F5D51;
+    color:rgb(214,213,186);
+    line-height: 1.9em;
+    text-align:justify;
+}
+
+a, a:hover
+{
+    color: #BECB0C;
+}
+
+h1
+{
+    font-family: 'Baumans', cursive;
+    font-size:1;
+    color:#efefef;
+    text-shadow: 0px 1px 0px rgb(10, 10, 10);
+}
+
+h2
+{
+    font-family: 'Baumans', cursive;
+    font-size:1.2;
+    color:#efefef;
+    text-shadow: 0px 1px 0px rgb(10, 10, 10);
+}
+
+h3
+{
+    font-family: 'Baumans', cursive;
+    font-size:1.1;
+    color:#efefef;
+    text-shadow: 0px 1px 0px rgb(10, 10, 10);
+}
+
+.navbar-ana
+{
+    padding:10px 0px;
+    margin:0px;
+    background: url('http://billfowlerrealestate.com/land_agent_web/images/header-bg.jpg') repeat-x;'
+}
+
+.navbar-ana .nav li a
+{
+    color:#fff;
+    font-family: 'Baumans', cursive;
+    font-size:1.2em;
+    /*font-weight: bold;*/
+    text-shadow: 0px 1px 0px rgb(0, 0, 0);
+}
+
+.navbar-ana .nav li a:hover
+{
+    background-color:transparent;
+}
+
+.navbar-ana .navbar-brand
+{
+    color:#fff;
+    font-family: 'Baumans', cursive;
+    font-size:1.5em;
+    text-shadow: 0px 2px 0px rgb(0, 0, 0);
+}
+
+.footer-ana
+{
+    background-color:rgb(77, 75, 67);;
+}
+
+label.label-light
+{
+    font-size:1em;
+    font-weight: normal;
+}
+
+.control-light
+{
+    font-size:1em;
+    font-weight: normal;
+}

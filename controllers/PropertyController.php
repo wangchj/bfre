@@ -39,12 +39,26 @@ class PropertyController extends Controller
      * @param $typeId integer
      * @return mixed
      */
-    public function actionIndex($typeId = null)
+    public function actionIndex($typeId = null,
+        $minPrice = null, $maxPrice = null, 
+        $minAcres = null, $maxAcres = null)
     {
         $activeQuery = Property::find();
 
-        if($typeId != null)
-            $activeQuery->where(['typeId'=>$typeId]);
+        if($typeId != null && $typeId != '' && is_numeric($typeId))
+            $activeQuery->where('typeId='. $typeId);
+
+        if($minPrice != null && $minPrice != '' && is_numeric($minPrice))
+            $activeQuery->andWhere('price>='. $minPrice);
+
+        if($maxPrice != null && $maxPrice != '' && is_numeric($maxPrice))
+            $activeQuery->andWhere('price<='. $maxPrice);
+
+        if($minAcres != null && $minAcres != '' && is_numeric($minAcres))
+            $activeQuery->andWhere('acres>='. $minAcres);
+
+        if($maxAcres != null && $maxAcres != '' && is_numeric($maxAcres))
+            $activeQuery->andWhere('acres<='. $maxAcres);
 
         return $this->render('index', ['properties' => $activeQuery->all()]);
     }
