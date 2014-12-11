@@ -45,7 +45,7 @@ class Property extends \yii\db\ActiveRecord
             [['address'], 'string', 'max' => 40],
             [['city', 'county'], 'string', 'max' => 20],
             [['state'], 'string', 'max' => 2],
-            [['headline'], 'string', 'max' => 30]
+            [['headline'], 'string', 'max' => 100]
         ];
     }
 
