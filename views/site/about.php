@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
             
         </div>
         <div class="col-sm-8">
-            <img src="<?=Url::to('@web')?>/images/Photo.jpg" style="float:left;width:160px;margin:0px 25px 0px 0px;"/>
+            <img src="<?=Url::to('@web/images/Photo.jpg')?>" style="float:left;width:160px;margin:0px 25px 0px 0px;"/>
             For decades the professionals at BFRE have served a wide variety of clients including individuals, corporations, banks and attorneys with both personal care and absolute integrity. The application of high-energy and dedicated expertise, coupled with a professional attitude that is focused on service, has ensured our clients that, regardless of the complexity of the real estate issue or the difficulty in satisfying diverse goals, an optimum solution to their real estate problems will be efficiency concluded in a timely manner.
             </p>
 <br>

@@ -32,7 +32,7 @@ HomeAsset::register($this);
             
             <div class="col-sm-12" style="color: rgb(214, 213, 186);">
                 
-                <img src="<?=Url::to('@web')?>/images/us.png" align="left" style="margin:25px 30px 10px 10px"/>
+                <img src="<?=Url::to('@web/images/us.png')?>" align="left" style="margin:25px 30px 10px 10px"/>
                 <h2>Welcome</h2>
                 
                 <p>
