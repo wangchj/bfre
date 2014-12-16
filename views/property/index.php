@@ -82,8 +82,13 @@ setlocale(LC_MONETARY, 'en_US');
                 <?php
                     $items = ArrayHelper::map(PropertyType::find()->all(), 'typeId', 'typeName');
                     $items[''] = 'All';
-                    echo Html::dropDownList('typeId',  isset($_REQUEST['typeId']) ? $_REQUEST['typeId'] : '', $items, ['class'=>'form-control control-light']);
+                    echo Html::dropDownList('typeId',  isset($_REQUEST['typeId']) ? $_REQUEST['typeId'] : '', $items, ['class'=>'form-control control-light','style'=>'margin-bottom:10px']);
                 ?>
+
+                <label class="label-light" for="property-keywords">Keywords</label>
+                <div class="row" style="margin-bottom:10px">
+                <div class="col-sm-12"><input type="text" name="keywords" class="form-control control-light" placeholder="Lake" <?php if(isset($_REQUEST['keywords'])):?>value="<?=$_REQUEST['keywords']?>"<?php endif;?>></div>
+                </div>
 
                 <br/>
                 <button type="submit" class="btn btn-primary control-light">Search</button>

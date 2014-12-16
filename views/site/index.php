@@ -100,8 +100,13 @@ HomeAsset::register($this);
             <?php
                 $items = ArrayHelper::map(PropertyType::find()->all(), 'typeId', 'typeName');
                 $items[''] = 'All';
-                echo Html::dropDownList('typeId', '', $items, ['class'=>'form-control control-light']);
+                echo Html::dropDownList('typeId', '', $items, ['class'=>'form-control control-light', 'style'=>'margin-bottom:10px']);
             ?>
+
+            <label class="label-light" for="property-keywords">Keywords</label>
+            <div class="row" style="margin-bottom:10px">
+                <div class="col-sm-12"><input type="text" name="keywords" class="form-control control-light" placeholder="Lake"></div>
+            </div>
 
             <br/>
             <button type="submit" class="btn btn-primary control-light">Search</button>

@@ -41,7 +41,8 @@ class PropertyController extends Controller
      */
     public function actionIndex($typeId = null,
         $minPrice = null, $maxPrice = null, 
-        $minAcres = null, $maxAcres = null)
+        $minAcres = null, $maxAcres = null,
+        $keywords = null)
     {
         $activeQuery = Property::find();
 
@@ -59,6 +60,9 @@ class PropertyController extends Controller
 
         if($maxAcres != null && $maxAcres != '' && is_numeric($maxAcres))
             $activeQuery->andWhere('acres<='. $maxAcres);
+
+        if($keywords != null && $keywords != '')
+            $activeQuery->andWhere("match(descr,features) against ('$keywords')");
 
         return $this->render('index', ['properties' => $activeQuery->all()]);
     }
