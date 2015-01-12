@@ -24,7 +24,8 @@ AddPropertyAsset::register($this);
     <?= $form->field($model, 'descr')->textarea(['rows' => 6]) ?>
     <?= $form->field($model, 'features')->textarea(['rows' => 6]) ?>
     <?= $form->field($model, 'acres')->textInput() ?>
-    <?= $form->field($model, 'price')->textInput() ?>
+    <?= $form->field($model, 'price',
+        ['template' => "{label}<div class=\"input-group\"><div class=\"input-group-addon\">$</div>{input}</div>{error}"])->textInput() ?>
 
     <h2>Location</h2>
 

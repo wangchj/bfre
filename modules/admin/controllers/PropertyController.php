@@ -72,10 +72,14 @@ class PropertyController extends Controller
     {
         $model = new Property();
 
+        
         if ($model->load(Yii::$app->request->post()))
         {
+            $model->acres = str_replace(',', '', $model->acres);
+            $model->price = str_replace(',', '', $model->price);
+            
             $this->addPhoto($model);
-
+            
             if($model->save())
                 return $this->redirect(['view', 'id' => $model->propId]);
         }
@@ -95,6 +99,9 @@ class PropertyController extends Controller
 
         if ($model->load(Yii::$app->request->post()))
         {
+            $model->acres = str_replace(',', '', $model->acres);
+            $model->price = str_replace(',', '', $model->price);
+
             $this->dropPhoto($model);
             $this->addPhoto($model);
 

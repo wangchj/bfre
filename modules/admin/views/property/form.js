@@ -13,6 +13,7 @@ var clearBoundButtn = null;
 
 $(function(){
     initMap();
+    initInputMask();
 });
 
 function initMap() {
@@ -157,4 +158,26 @@ function clearBoundButtonClick()
     }
 
     $('#property-bound').val('');
+}
+
+function initInputMask()
+{
+    $('#property-price').inputmask(
+    {
+        'alias':'numeric',
+        'digits':2,
+        'groupSize':3,
+        'groupSeparator':',',
+        'autoGroup':true,
+        'rightAlign':false
+    });
+
+    $('#property-acres').inputmask(
+    {
+        'alias':'numeric',
+        'groupSize':3,
+        'groupSeparator':',',
+        'autoGroup':true,
+        'rightAlign':false
+    });
 }

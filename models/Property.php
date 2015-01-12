@@ -41,7 +41,6 @@ class Property extends \yii\db\ActiveRecord
             [['typeId', 'county', 'state', 'latlon', 'headline', 'descr', 'acres', 'price'], 'required'],
             [['typeId'], 'integer'],
             [['latlon', 'bound', 'descr', 'features', 'pictures'], 'string'],
-            [['acres', 'price'], 'number'],
             [['address'], 'string', 'max' => 40],
             [['city', 'county'], 'string', 'max' => 20],
             [['state'], 'string', 'max' => 2],
