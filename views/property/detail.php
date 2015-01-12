@@ -63,7 +63,7 @@ $this->title = Yii::$app->name . ' property';
     <?php if($property->features != null):?>
     <div class="row"><div class="col-sm-12" style="margin-top:20px">
         <div style="border-bottom:1px dotted #AAA; margin-bottom:10px;font-size:16px">Special Features</div>
-        <?=nl2br($property->descr)?>
+        <?=nl2br($property->features)?>
     </div></div>
     <?php endif;?>
 
