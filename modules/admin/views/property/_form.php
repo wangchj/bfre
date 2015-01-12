@@ -19,7 +19,7 @@ AddPropertyAsset::register($this);
 
     <h2>Description</h2>
 
-    <?= $form->field($model, 'headline')->textInput(['maxlength' => 30]) ?>
+    <?= $form->field($model, 'headline')->textInput(['maxlength' => 100]) ?>
     <?= $form->field($model, 'typeId')->dropDownList(ArrayHelper::map(PropertyType::find()->all(), 'typeId', 'typeName')) ?>
     <?= $form->field($model, 'descr')->textarea(['rows' => 6]) ?>
     <?= $form->field($model, 'features')->textarea(['rows' => 6]) ?>
