@@ -40,14 +40,23 @@ AddPropertyAsset::register($this);
 
     <label class="control-label" for="property-state">Map Data</label>
 
-    <div id="point"></div>
-
     <?php
         $field = $form->field($model, 'latlon');
         $field->template = '{input}';
         echo $field->hiddenInput();
     ?>
 
+    <div class="form-group form-inline">
+        <div class="input-group col-md-4 col-sm-4 col-sm-offset-1" style="margin-bottom:10px">
+            <div class="input-group-addon">Latitude</div>
+            <input id="lat" class="form-control" />
+        </div>
+        <div class="input-group col-md-4 col-sm-4 col-sm-offset-1" style="margin-bottom:10px">
+            <div class="input-group-addon">Longitude</div>
+            <input id="lon" class="form-control" />
+        </div>
+    </div>
+    
     <div id="map" style="width:100%;height:500px"></div>
     
     <?php

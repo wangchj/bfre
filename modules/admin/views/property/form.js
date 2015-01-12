@@ -32,6 +32,8 @@ function initMap() {
     loadMapOverlay();
     initMapControl();
 
+    $('#lat, #lon').blur(latlonBlur).keypress(latlonKeypress);
+
     //Assign event handler for map click event.
     google.maps.event.addListener(map, 'click', mapClick);
 }
@@ -48,7 +50,8 @@ function mapClick(event)
         marker = new google.maps.Marker({position:event.latLng, map:map});
         marker.setMap(map);
         $('#property-latlon').val(event.latLng.lat() + ' ' + event.latLng.lng());
-        $('#point').html(event.latLng.toUrlValue()); 
+        $('#lat').val(event.latLng.lat());
+        $('#lon').val(event.latLng.lng());
     }
     else //Assume boundMode
     {
@@ -85,6 +88,38 @@ function initMapControl()
 }
 
 /**
+ * Event handler when lat, lon input field lose focus.
+ */
+function latlonBlur(event)
+{
+    var lat = parseFloat($('#lat').val());
+    var lon = parseFloat($('#lon').val());
+
+    if(!isNaN(lat) && lat >= -90 && lat <= 90 && !isNaN(lon) && lon >= -180 && lon <= 180)
+    {
+        var latlon = parseLatLng(lat + ' ' + lon);
+        map.setCenter(latlon);
+        if(marker != null)
+            marker.setMap(null);
+        marker = new google.maps.Marker({position:latlon, map:map});
+        marker.setMap(map);
+        $('#property-latlon').val(lat + ' ' + lon);
+    }
+}
+
+/**
+ * Keypress event handler for lat lon input fields.
+ */
+function latlonKeypress(event)
+{
+    if(event.which == 13)
+    {
+        $(this)[0].blur();
+        event.preventDefault();
+    }
+}
+
+/**
  * Load saved marker and polygon, if data exist.
  */
 function loadMapOverlay()
@@ -94,7 +129,8 @@ function loadMapOverlay()
         latlng = parseLatLng(pointStr);
         map.setCenter(latlng);
         marker = new google.maps.Marker({position:latlng, map:map});
-        $('#point').html(latlng.toUrlValue());
+        $('#lat').val(latlng.lat());
+        $('#lon').val(latlng.lng());
     }
     if(typeof boundStr != 'undefined' && boundStr != null && boundStr != '')
     {
