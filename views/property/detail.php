@@ -24,8 +24,8 @@ $this->title = Yii::$app->name . ' property';
 
     <div class="row">
         <div class="col-sm-6" style="margin-top:20px">
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
-                <ol class="carousel-indicators" style="bottom:0px;margin-bottom:5px;opacity:0.75">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="5000">
+                <ol class="carousel-indicators" style="bottom:0px;margin-bottom:5px">
                     <?php
                     $photoUrls = $property->allPhotoUrl();
                     for($i = 0; $i < count($photoUrls); $i++):?>

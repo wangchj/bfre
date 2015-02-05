@@ -85,3 +85,13 @@ label.label-light
     font-size:1em;
     font-weight: normal;
 }
+
+.carousel-indicators li
+{
+    box-shadow:2px 2px 6px 0px #000;
+}
+
+.carousel-indicators li.active
+{
+    background-color: rgba(227, 232, 41, 0.7);
+}
