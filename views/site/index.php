@@ -71,7 +71,7 @@ HomeAsset::register($this);
                         <!-- img src="<?=$property->firstPhotoUrl()?>" style="width:100%" / -->
                     </div>
                     <div style="clear:both; padding:10px; text-align:center">
-                        <a href="<?=Url::to(['property/detail', 'id'=>$property->propId])?>"><?=$property->headline?></a>
+                        <a href="<?=Url::to(['property/detail', 'id'=>$property->propId])?>"><?=substr($property->headline, 0, 30)?></a>
                         <br>
                         <?php
                             if(strlen($property->descr) > 50)
