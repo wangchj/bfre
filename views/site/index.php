@@ -1,4 +1,5 @@
 <?php
+use app\models\Property;
 use app\models\PropertyType;
 use app\assets\HomeAsset;
 use yii\helpers\Url;
@@ -54,29 +55,36 @@ HomeAsset::register($this);
     <div class="row">
 
         <div class="col-sm-9" style="margin-top:25px">
-        <div class="img-thumbnail">
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="10000">
-            <ol class="carousel-indicators" style="bottom:0px;margin-bottom:5px;opacity:1">
-                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="2"></li>   
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="item active" style="overflow:hidden">
-                    <img src="http://billfowlerrealestate.com/land_agent_web/images/slider1.jpg" />
+            <div class="row">
+                <?php
+                    $properties = Property::getRandomProperties(6);
+                    foreach($properties as $property):
+                ?>
+                <div class="col-sm-4" style="margin-bottom:20px;">
+                    <div style="
+                        background:url(<?=$property->firstPhotoUrl()?>);
+                        background-size:cover;
+                        background-position:center;
+                        position:relative;
+                        overflow:hidden;
+                        padding-bottom:75%" class="imgTile" data-url="<?=Url::to(['property/detail', 'id'=>$property->propId])?>">
+                        <!-- img src="<?=$property->firstPhotoUrl()?>" style="width:100%" / -->
+                    </div>
+                    <div style="clear:both; padding:10px; text-align:center">
+                        <a href="<?=Url::to(['property/detail', 'id'=>$property->propId])?>"><?=$property->headline?></a>
+                        <br>
+                        <?php
+                            if(strlen($property->descr) > 50)
+                                echo substr($property->descr, 0, 50) . 
+                                    Html::a(' more..', ['property/detail', 'id'=>$property->propId]);
+                            else
+                                echo $property->descr;
+                        ?>
+                    </div>
                 </div>
-                <div class="item" style="overflow:hidden">
-                    <img src="http://billfowlerrealestate.com/land_agent_web/images/slider2.jpg" />
-                </div>
-                <div class="item" style="overflow:hidden">
-                    <img src="http://billfowlerrealestate.com/land_agent_web/images/slider3.jpg" />
-                </div>
+                <?php endforeach;?>
             </div>
         </div>
-        </div>
-        </div>
-
-        
 
         <div class="col-sm-3">
 

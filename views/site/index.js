@@ -1,11 +1,5 @@
 $(function(){
-      //SyntaxHighlighter.all();
-    });
-    $(window).load(function(){
-      $('.flexslider').flexslider({
-        animation: "slide",
-        start: function(slider){
-          $('body').removeClass('loading');
-        }
-      });
-    });
+    $('.imgTile').click(function(){
+        window.location.href = $(this).data('url');
+    })
+});

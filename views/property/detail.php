@@ -27,7 +27,7 @@ $this->title = Yii::$app->name . ' property';
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
                 <ol class="carousel-indicators" style="bottom:0px;margin-bottom:5px;opacity:0.75">
                     <?php
-                    $photoUrls = getAllPhotoUrl($property);
+                    $photoUrls = $property->allPhotoUrl();
                     for($i = 0; $i < count($photoUrls); $i++):?>
                     <li data-target="#carousel-example-generic" data-slide-to="<?=$i?>" <?php if($i == 0) echo 'class="active"'?>></li>
                     <?php endfor;?>
@@ -35,7 +35,7 @@ $this->title = Yii::$app->name . ' property';
                 
                 <div class="carousel-inner" role="listbox">
                     <?php
-                    $photoUrls = getAllPhotoUrl($property);
+                    $photoUrls = $property->allPhotoUrl();
                     for($i = 0; $i < count($photoUrls); $i++):?>
                     <div class="item <?php if($i == 0) echo 'active'?>">
                         <img src="<?php echo $photoUrls[$i]?>" />
@@ -79,23 +79,3 @@ $this->title = Yii::$app->name . ' property';
 var pointStr = '<?=$property->latlon?>';
 var boundStr = '<?=$property->bound?>';
 </script>
-
-<?php
-function getFirstPhotoUrl($property)
-{
-    if($property == null || $property->pictures == null || $property->pictures == '')
-        return null;
-    $pos = strpos($property->pictures, "\n");
-    return substr($property->pictures, 0, $pos);
-}
-
-/**
- * Gets all photo url as an array of string.
- */
-function getAllPhotoUrl($property)
-{
-    if($property == null || $property->pictures == null || $property->pictures == '')
-        return null;
-    return explode("\n", $property->pictures);
-}
-?>

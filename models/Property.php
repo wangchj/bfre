@@ -75,4 +75,53 @@ class Property extends \yii\db\ActiveRecord
     {
         return $this->hasOne(PropertyType::className(), ['typeId'=>'typeId']);
     }
+
+    /**
+     * Returns record count of properties table.
+     */
+    //public static function count()
+    //{
+    //    $cmd = Yii::$app->db->createCommand('select count(*) from ' . self::tableName());
+    //    return $cmd->queryScalar();
+    //}
+
+    /**
+     * Gets an array of random Property objects of size $count from the database. If the table size is less
+     * than $count, all records are returned.
+     * @param integer $count the number of objects to be returned.
+     * @return An array
+     */
+    public static function getRandomProperties($count)
+    {
+        $tbSize = Property::find()->count();
+        
+        if($tbSize <= $count)
+            return Property::find()->all();
+
+        $offset = rand(0, $tbSize - $count);
+        return Property::find()->offset($offset)->limit($count)->all();
+    }
+
+    /**
+     * Gets the url of the first photo of this property.
+     * @return string or null if this property does not have photos.
+     */
+    public function firstPhotoUrl()
+    {
+        if($this->pictures == null || $this->pictures == '')
+            return null;
+        $pos = strpos($this->pictures, "\n");
+        return substr($this->pictures, 0, $pos);
+    }
+
+    /**
+     * Gets all photo url as an array of string.
+     * @return null if this property does not have photos.
+     */
+    function allPhotoUrl()
+    {
+        if($this->pictures == null || $this->pictures == '')
+            return null;
+        return explode("\n", $this->pictures);
+    }
 }
