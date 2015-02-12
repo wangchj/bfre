@@ -22,7 +22,7 @@ class AddPropertyAsset extends AssetBundle
     ];
     public $js =
     [
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyCPBfmojGyNxx_egxYm1uNr_Lb7Vu5Yvgs&libraries=geometry&sensor=false',
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyD8Ls8RLsCalFAdQ48dPFQL-dEsgs0mF_E&libraries=geometry&sensor=false',
         'map_helper.js',
         'form.js',
         'form_photo.js'
