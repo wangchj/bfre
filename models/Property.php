@@ -20,7 +20,8 @@ use Yii;
  * @property string $features
  * @property string $pictures
  * @property double $acres
- * @property double $price
+ * @property double $priceAcre
+ * @property double $priceTotal
  */
 class Property extends \yii\db\ActiveRecord
 {
@@ -38,9 +39,9 @@ class Property extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['typeId', 'county', 'state', 'latlon', 'headline', 'descr', 'acres', 'price'], 'required'],
+            [['typeId', 'county', 'state', 'latlon', 'headline', 'descr', 'acres'], 'required'],
             [['typeId'], 'integer'],
-            [['latlon', 'bound', 'descr', 'features', 'pictures'], 'string'],
+            [['latlon', 'bound', 'descr', 'features', 'pictures', 'priceAcre', 'priceTotal'], 'string'],
             [['address'], 'string', 'max' => 40],
             [['city', 'county'], 'string', 'max' => 20],
             [['state'], 'string', 'max' => 2],
@@ -67,7 +68,8 @@ class Property extends \yii\db\ActiveRecord
             'features' => 'Special Features',
             'pictures' => 'Pictures',
             'acres' => 'Acres',
-            'price' => 'Price',
+            'priceAcre' => 'Price Per Acre',
+            'priceTotal' => 'Total Price',
         ];
     }
 

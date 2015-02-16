@@ -51,7 +51,15 @@ $this->title = Yii::$app->name . ' property';
         <tr><th>County</th><td><?=$property->county?></td></tr>
         <tr><th>State</th><td><?=$property->state?></td></tr>
         <tr><th>Size</th><td><?=$property->acres?> acres</td></tr>
-        <tr><th>Price</th><td>$<?=number_format($property->price)?></td></tr>
+        
+        <?php if($property->priceAcre != null):?>
+        <tr><th>Price Per Acre</th><td>$<?=number_format($property->priceAcre)?></td></tr>
+        <?php endif;?>
+
+        <?php if($property->priceTotal != null):?>
+        <tr><th>Total Price</th><td>$<?=number_format($property->priceTotal)?></td></tr>
+        <?php endif;?>
+        
         </table></div>
     </div>
 

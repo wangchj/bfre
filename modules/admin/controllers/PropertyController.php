@@ -71,12 +71,12 @@ class PropertyController extends Controller
     public function actionCreate()
     {
         $model = new Property();
-
         
-        if ($model->load(Yii::$app->request->post()))
+        if ($model->load(Yii::$app->request->post()) && self::validatePrices($model))
         {
             $model->acres = str_replace(',', '', $model->acres);
-            $model->price = str_replace(',', '', $model->price);
+            $model->priceAcre = str_replace(',', '', $model->priceAcre);
+            $model->priceTotal = str_replace(',', '', $model->priceTotal);
             
             $this->addPhoto($model);
             
@@ -97,19 +97,36 @@ class PropertyController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()))
+        if ($model->load(Yii::$app->request->post()) && self::validatePrices($model))
         {
             $model->acres = str_replace(',', '', $model->acres);
-            $model->price = str_replace(',', '', $model->price);
+            $model->priceAcre = str_replace(',', '', $model->priceAcre);
+            $model->priceTotal = str_replace(',', '', $model->priceTotal);
 
             $this->dropPhoto($model);
             $this->addPhoto($model);
+
 
             if($model->save())
                 return $this->redirect(['view', 'id' => $model->propId]);
         }
 
         return $this->render('update', ['model' => $model]);
+    }
+
+    /**
+     * Validates price per acre and total price combination: one (or both) of the two prices must be specified.
+     * @param $property Property model object.
+     * @return true if one of the price is present; false if both inputs are empty.
+     */
+    private static function validatePrices($property)
+    {
+        if(($property->priceAcre == null || $property->priceAcre == '') && ($property->priceTotal == null || $property->priceTotal == ''))
+        {
+            $property->addError('priceAcre', '\'Price Per Acre\' and \'Total Price\' cannot both be empty.');
+            return false;
+        }
+        return true;
     }
 
     /**

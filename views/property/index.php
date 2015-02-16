@@ -55,7 +55,14 @@ setlocale(LC_MONETARY, 'en_US');
                                 else
                                     echo $property->descr;
                             ?>
-                        <div style="margin-top:10px"><?=number_format($property->acres,2)?> acres | $<?=number_format($property->price)?></div>
+                        <div style="margin-top:10px">
+                            <?=number_format($property->acres,2)?> acres |
+                            <?php if($property->priceAcre != null):?>
+                                $<?=number_format($property->priceAcre)?> per acre
+                            <?php else:?>
+                                $<?=number_format($property->priceTotal)?>
+                            <?php endif;?>
+                        </div>
                     </div>
                 </div>
             <?php endforeach;?>

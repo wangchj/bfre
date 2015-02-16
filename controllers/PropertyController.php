@@ -50,10 +50,10 @@ class PropertyController extends Controller
             $activeQuery->where('typeId='. $typeId);
 
         if($minPrice != null && $minPrice != '' && is_numeric($minPrice))
-            $activeQuery->andWhere('price>='. $minPrice);
+            $activeQuery->andWhere('(' . 'priceTotal>=' . $minPrice . ' OR priceAcre>=' . $minPrice . ')');
 
         if($maxPrice != null && $maxPrice != '' && is_numeric($maxPrice))
-            $activeQuery->andWhere('price<='. $maxPrice);
+            $activeQuery->andWhere('(' . 'priceTotal<=' . $maxPrice . ' OR priceAcre<=' . $maxPrice . ')');
 
         if($minAcres != null && $minAcres != '' && is_numeric($minAcres))
             $activeQuery->andWhere('acres>='. $minAcres);

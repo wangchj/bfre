@@ -198,7 +198,7 @@ function clearBoundButtonClick()
 
 function initInputMask()
 {
-    $('#property-price').inputmask(
+    $('#property-pricetotal, #property-priceacre').inputmask(
     {
         'alias':'numeric',
         'digits':2,

@@ -42,7 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'latlon',
             'bound',
             ['attribute'=>'acres', 'value'=>number_format($model->acres,2)],
-            ['attribute'=>'price', 'value'=>'$' . number_format($model->price)],
+            ['attribute'=>'priceAcre', 'value'=>'$' . number_format($model->priceAcre)],
+            ['attribute'=>'priceTotal', 'value'=>'$' . number_format($model->priceTotal)],
         ],
     ]) ?>
 
