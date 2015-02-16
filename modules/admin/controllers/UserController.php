@@ -72,13 +72,16 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->userId]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+        {
+            $model->phash = password_hash($model->phash, PASSWORD_BCRYPT);
+
+            if($model->save())
+                return $this->redirect(['index']);
         }
+
+        $model->phash = '';
+        return $this->render('update', ['model' => $model]);
     }
 
     /**
