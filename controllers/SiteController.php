@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\User;
+use SendGrid;
 
 class SiteController extends Controller
 {
@@ -81,14 +82,33 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
+        {
+            $username = Yii::$app->params['sendgrid']['username'];
+            $password = Yii::$app->params['sendgrid']['password'];
+            $toAddr   = Yii::$app->params['adminEmail'];
+
+            $sendgrid = new SendGrid($username, $password);
+
+            $mail = new SendGrid\Email();
+
+            $mail->setFrom(Yii::$app->params['contact']['sender']);
+            $mail->setReplyTo($model->email);
+            $mail->setTos(Yii::$app->params['contact']['receivers']);
+            
+            $mail->setSubject("Bill Fowler Real Estate message from {$model->name}");
+            $mail->setText("Message from: {$model->name} ({$model->email})\n\n {$model->body}");
+
+            $sendgrid->send($mail);
+
             Yii::$app->session->setFlash('contactFormSubmitted');
 
             return $this->refresh();
-        } else {
-            return $this->render('contact', [
-                'model' => $model,
-            ]);
+        }
+        else
+        {
+            return $this->render('contact', ['model' => $model]);
         }
     }
 

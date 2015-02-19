@@ -41,7 +41,6 @@ $this->title = Yii::$app->name . ' Contact';
             <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
                 <?= $form->field($model, 'name') ?>
                 <?= $form->field($model, 'email') ?>
-                <?= $form->field($model, 'subject') ?>
                 <?= $form->field($model, 'body')->textArea(['rows' => 6]) ?>
                 <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
                     'template' => '<div class="row"><div class="col-sm-3">{image}</div><div class="col-sm-6">{input}</div></div>',
