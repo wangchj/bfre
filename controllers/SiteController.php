@@ -98,7 +98,7 @@ class SiteController extends Controller
             $mail->setTos(Yii::$app->params['contact']['receivers']);
             
             $mail->setSubject("Bill Fowler Real Estate message from {$model->name}");
-            $mail->setText("Message from: {$model->name} ({$model->email})\n\n {$model->body}");
+            $mail->setText("Message from: {$model->name} ({$model->email})\n\n{$model->body}");
 
             $sendgrid->send($mail);
 
