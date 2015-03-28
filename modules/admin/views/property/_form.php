@@ -48,12 +48,15 @@ AddPropertyAsset::register($this);
         echo $field->hiddenInput();
     ?>
 
-    <div class="form-group form-inline">
-        <div class="input-group col-md-4 col-sm-4 col-sm-offset-1" style="margin-bottom:10px">
+    <div class="form-group form-inline" style="margin-bottom:20px">
+        <div class="col-md-1 col-sm-3 col-sm-offset-1">
+            <input type="button" id="geocode" class="btn btn-default" value="From Address" />
+        </div>
+        <div class="input-group col-md-3 col-sm-3 col-sm-offset-1">
             <div class="input-group-addon">Latitude</div>
             <input id="lat" class="form-control" />
         </div>
-        <div class="input-group col-md-4 col-sm-4 col-sm-offset-1" style="margin-bottom:10px">
+        <div class="input-group col-md-3 col-sm-3 col-sm-offset-1">
             <div class="input-group-addon">Longitude</div>
             <input id="lon" class="form-control" />
         </div>

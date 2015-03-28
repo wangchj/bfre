@@ -1,6 +1,8 @@
 //State variables
 var map;
 
+var geocoder;
+
 var pointMode = 0;
 var boundMode = 1;
 var drawMode;
@@ -14,6 +16,7 @@ var clearBoundButtn = null;
 $(function(){
     initMap();
     initInputMask();
+    $('#geocode').click(geocodeButtonClick);
 });
 
 function initMap() {
@@ -216,4 +219,66 @@ function initInputMask()
         'autoGroup':true,
         'rightAlign':false
     });
+}
+
+/**
+ * Event handler for "From Address" button click.
+ */
+function geocodeButtonClick()
+{
+    var addr = $('#property-address').val();
+    var city = $('#property-city').val();
+    var state = $('#property-state').val();
+
+    if(addr == '' || city == '' || state == '') {
+        alert('Address is incomplete.');
+        return;
+    }
+
+    if(geocoder == null)
+        geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({address: addr + ',' + city + ',' + state}, geocodeCallback);
+}
+
+/**
+ * Call back function for Google Maps asynchronous Geocoder.geocode().
+ * @param res an array of google.maps.GeocoderResult objects.
+ * @param status google.maps.GeocoderStatus object.
+ */
+function geocodeCallback(res, status)
+{
+    if(status != google.maps.GeocoderStatus.OK) {
+        switch(status) {
+            case google.maps.GeocoderStatus.ERROR:
+                alert('Address to coordinates translation result in error.');
+                break;
+            case google.maps.GeocoderStatus.INVALID_REQUEST:
+                alert('Address to coordinates translation: invalid request.');
+                break;
+            case google.maps.GeocoderStatus.OVER_QUERY_LIMIT:
+                alert('Address to coordinates translation: over query limit.');
+                break;
+            case google.maps.GeocoderStatus.REQUEST_DENIED:
+                alert('Address to coordinates translation: request denied.');
+                break;
+            case google.maps.GeocoderStatus.UNKNOWN_ERROR:
+                alert('Address to coordinates translation: unknown error.');
+                break;
+            case google.maps.GeocoderStatus.ZERO_RESULTS:
+                alert('Address to coordinates translation returned no result.');
+        }
+        return;
+    }
+
+    var latLng = res[0].geometry.location;
+
+    if(marker != null)
+        marker.setMap(null);
+    marker = new google.maps.Marker({position:latLng, map:map});
+    marker.setMap(map);
+    $('#property-latlon').val(latLng.lat() + ' ' + latLng.lng());
+    $('#lat').val(latLng.lat());
+    $('#lon').val(latLng.lng());
+    map.setCenter(latLng);
 }
