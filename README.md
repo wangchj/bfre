@@ -49,6 +49,7 @@ The following installs the application from the repository.
 
 ```
 cd ~
+composer global require "fxp/composer-asset-plugin:1.0.0"
 git clone https://github.com/wangchj/bfre.git
 cd bfre
 composer.phar install
