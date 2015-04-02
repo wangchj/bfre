@@ -103,9 +103,8 @@ class PropertyController extends Controller
             $model->priceAcre = str_replace(',', '', $model->priceAcre);
             $model->priceTotal = str_replace(',', '', $model->priceTotal);
 
-            $this->dropPhoto($model);
+            $this->updatePhoto($model);
             $this->addPhoto($model);
-
 
             if($model->save())
                 return $this->redirect(['view', 'id' => $model->propId]);
@@ -159,24 +158,42 @@ class PropertyController extends Controller
     }
 
     /**
-     * Process drop list from POST
-     * @param $property an Property model object.
+     * Process photo removal and reordering.
+     * Modified photo list is passed in with $_POST['photoOrder'].
+     * TODO: physically remove photo from disk.
+     * @param $property current Property model object.
      */
-    private function dropPhoto($property)
-    {
-        //If nothing to drop, do nothing
-        if(!isset($_POST['droplist']) || $_POST['droplist'] == '')
+    private function updatePhoto($property) {
+        if(!isset($_POST['photoOrder']) || $_POST['photoOrder'] == null)
             return;
 
-        $dropList = explode(',', $_POST['droplist']);
         $fromList = explode("\n", $property->pictures);
-        sort($dropList);
-        for($i = count($dropList) - 1; $i >= 0; $i--)
-            unset($fromList[$dropList[$i]]);
-        
-        //TODO: physically remove photo from disk
+        $order    = explode(',', $_POST['photoOrder']);
 
-        $property->pictures = implode("\n", $fromList);
+        if(!$this->photoOrderChanged($fromList, $order))
+            return;
+
+        $resList = [];
+
+        for($i = 0; $i < count($order); $i++)
+            $resList[] = trim($fromList[$order[$i]]);
+
+        $property->pictures = implode("\n", $resList);
+    }
+
+    /**
+     * Checks if photo list and ordering has been changed.
+     * @param $fromList an array of original photo url list.
+     * @param $order an array that represent the ordering sent from the client.
+     * @return true if the list has been changed and should be reprocessed; false otherwise.
+     */
+    private function photoOrderChanged($fromList, $order) {
+        if(count($fromList) != count($order))
+            return true;
+        for($i = 0; $i < count($order); $i++)
+            if($order[$i] != $i)
+                return true;
+        return false;
     }
 
     /**

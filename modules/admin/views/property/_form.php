@@ -76,23 +76,32 @@ AddPropertyAsset::register($this);
     <!-- ?= $form->field($model, 'pictures')->textarea(['rows' => 6]) ? -->
 
     <div class="row">
-    <input type="hidden" id="droplist" name="droplist" />
+    <input type="hidden" id="photo-order" name="photoOrder" />
+
     <?php
     //If this is an existing record, load the photos
     if(!$model->isNewRecord && $model->pictures != null && $model->pictures != ''):
-        $photoUrls = explode("\n", $model->pictures);
-        for($i = 0; $i < count($photoUrls); $i++):
     ?>
-        <div class="photo col-sm-2" id="photo<?=$i?>">
-            <div class="thumbnail">
-                <img src="<?=$photoUrls[$i]?>" />
-                <div class="caption" style="text-align:center">
-                    <div class="photo-remove btn btn-default btn-sm" data-id="<?=$i?>" role="button">remove</div>
-                </div>
-            </div>
-        </div>
-    <?php endfor; endif;?>
-    </div>
+        <?php
+        $photos = explode("\n", $model->pictures);
+        ?>
+
+        <ul id="photo-list">
+            <?php for($i = 0; $i < count($photos); $i++): ?>
+                <li id="<?=$i?>">
+                    <div class="photo-frame thumbnail">
+                        <div class="photo-size">
+                            <img class="photo" src="<?=$photos[$i]?>" />
+                        </div>
+                        <div class="caption" style="text-align:center">
+                            <div class="photo-remove btn btn-default btn-sm" data-id="<?=$i?>" role="button">remove</div>
+                        </div>
+                    </div>
+                </li>
+            <?php endfor;?>
+        </ul>
+    <?php endif;?>
+    </div><!-- end row -->
 
     <!-- MAX_FILE_SIZE must precede the file input field -->
     <!-- input type="hidden" name="MAX_FILE_SIZE" value="30000" / -->

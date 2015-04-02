@@ -15,3 +15,25 @@
     color:#6E6E6E;
 }
 
+/* Photo Sortable Styles */
+#photo-list {list-style-type: none;}
+#photo-list li {float:left;}
+.photo-frame {
+    margin:5px;
+}
+.photo-size {
+    width:150px;
+    height:116px;
+    overflow: hidden;
+}
+.placeholder {
+    width:160px;
+    height:174px;
+    padding:4px;
+    border:1px;
+    margin:5px;
+}
+.photo {
+    width:150px;
+}
+
