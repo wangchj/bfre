@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use Yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -42,10 +43,13 @@ LayoutAsset::register($this);
                     
                         
                     <ul id="w1" class="navbar-nav navbar-right nav">
-                        <li class="active"><a href="/~wangchj/bfre/web/site/index">Home</a></li>
-                        <li><a href="/~wangchj/bfre/web/site/about">About</a></li>
-                        <li><a href="/~wangchj/bfre/web/property/index">Properties</a></li>
-                        <li><a href="/~wangchj/bfre/web/site/contact">Contact</a></li>
+                        <li class="active"><a href="<?=Url::to(['site/index'])?>">Home</a></li>
+                        <li><a href="<?=Url::to(['site/about'])?>">About</a></li>
+                        <li><a href="<?=Url::to(['property/index'])?>">Properties</a></li>
+                        <li><a href="<?=Url::to(['site/contact'])?>">Contact</a></li>
+                        <?php if(!Yii::$app->user->isGuest): ?>
+                        <li><a href="<?=Url::to(['site/logout'])?>" data-method="post">Logout (<?=Yii::$app->user->identity->fname?>)</a></li> 
+                        <?php endif;?>
                     </ul>
 
                      <div style="display:inline;float:right; position:relative; top:8px; right: 10px">
