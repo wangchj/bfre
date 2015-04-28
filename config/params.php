@@ -2,6 +2,7 @@
 
 return [
     'adminEmail' => 'admin@example.com',
+    'phone'=>'',
     'sendgrid' => [
         'username' => '',
         'password' => ''

@@ -26,32 +26,47 @@ LayoutAsset::register($this);
 
 <?php $this->beginBody() ?>
     <div class="wrap">
-        <?php
-            NavBar::begin([
-                'brandLabel' => '<span style="font-size:1.2em">B</span>ill <span style="font-size:1.2em">F</span>owler <span style="font-size:1.2em">R</span>eal <span style="font-size:1.2em">E</span>state',
-                'brandUrl' => Yii::$app->homeUrl,
-                'options' => [
-                    'class' => 'navbar-ana',
-                ],
-            ]);
-            echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => [
-                    ['label' => 'Home', 'url' => ['site/index']],
-                    ['label' => 'About', 'url' => ['site/about']],
-                    ['label' => 'Properties', 'url' => ['property/index']],
-                    ['label' => 'Contact', 'url' => ['site/contact']],
-                    [
-                        'label' => Yii::$app->user->isGuest ? '' : 'Logout (' . Yii::$app->user->identity->fname . ')',
-                        'url' => ['/site/logout'],
-                        'linkOptions' => ['data-method' => 'post'],
-                        'visible' => !Yii::$app->user->isGuest
-                    ],
-                ],
-            ]);
-            NavBar::end();
-        ?>
+        <nav id="w0" class="navbar-ana navbar" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w0-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/~wangchj/bfre/web/">
+                        <span style="font-size:1.2em">B</span>ill <span style="font-size:1.2em">F</span>owler <span style="font-size:1.2em">R</span>eal <span style="font-size:1.2em">E</span>state</a>
+                </div>
+                <div id="w0-collapse" class="collapse navbar-collapse">
+                    
+                        
+                    <ul id="w1" class="navbar-nav navbar-right nav">
+                        <li class="active"><a href="/~wangchj/bfre/web/site/index">Home</a></li>
+                        <li><a href="/~wangchj/bfre/web/site/about">About</a></li>
+                        <li><a href="/~wangchj/bfre/web/property/index">Properties</a></li>
+                        <li><a href="/~wangchj/bfre/web/site/contact">Contact</a></li>
+                    </ul>
 
+                     <div style="display:inline;float:right; position:relative; top:8px; right: 10px">
+                        <div style="
+                            background-color:#d3cfab;
+                            padding: 5px 10px;
+                            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.22);
+                            border-radius: 6px;
+                            color:#292821;
+                            opacity:1;
+                            font-weight:bold;
+                            font-size:12px;
+                            /*opacity:0.8;*/
+                            text-shadow:1px 1px #ddd">
+                            <span class="glyphicon glyphicon-earphone"></span> &nbsp; <?=Yii::$app->params['phone']?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
         <?= $content ?>
         
     </div>
