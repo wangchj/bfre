@@ -36,7 +36,7 @@ LayoutAsset::register($this);
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/~wangchj/bfre/web/">
+                    <a class="navbar-brand" href="<?=Url::to(['site/index'])?>">
                         <span style="font-size:1.2em">B</span>ill <span style="font-size:1.2em">F</span>owler <span style="font-size:1.2em">R</span>eal <span style="font-size:1.2em">E</span>state</a>
                 </div>
                 <div id="w0-collapse" class="collapse navbar-collapse">
