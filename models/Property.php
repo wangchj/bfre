@@ -67,7 +67,7 @@ class Property extends \yii\db\ActiveRecord
             'descr' => 'Description',
             'features' => 'Special Features',
             'pictures' => 'Pictures',
-            'acres' => 'Acres',
+            'acres' => 'Acreage',
             'priceAcre' => 'Price Per Acre',
             'priceTotal' => 'Total Price',
         ];
