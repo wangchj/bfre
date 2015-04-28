@@ -31,7 +31,7 @@ HomeAsset::register($this);
                 
             </div -->
             
-            <div class="col-sm-12" style="color: rgb(214, 213, 186);">
+            <div class="col-sm-9" style="color: rgb(214, 213, 186);">
                 
                 <img src="<?=Url::to('@web/images/us.png')?>" align="left" style="margin:25px 30px 10px 10px"/>
                 <h2>Welcome</h2>
@@ -45,6 +45,16 @@ HomeAsset::register($this);
                 <p>
                 We provide personal care with absolute integrity; and as such is the go-to organization for both sellers and buyers who look for professional high-energy and dedicated expertise that will result in a successful conclusion to their real estate desires or problems.
                 </p>
+            </div>
+
+            <div class="col-sm-3" style="margin-top:65px">
+                <div class="row">
+                    <div class="col-xs-12" style="font-size:12px">
+                        <b><span style="color:#fff">Looking for something special?</span></b>
+
+                        <p>Tell us what kind of property you are looking for by <a href="<?=Url::to(['site/contact'])?>">contacting us</a>, and we will employ a vast list of contacts and resources, obtained through decades in the business, to find what you desire.</p>
+                    </div>
+                </div>
             </div>
         </div><!-- row -->
     </div><!-- container -->
