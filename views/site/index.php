@@ -33,7 +33,7 @@ HomeAsset::register($this);
             
             <div class="col-sm-9" style="color: rgb(214, 213, 186);">
                 
-                <img src="<?=Url::to('@web/images/us.png')?>" align="left" style="margin:25px 30px 10px 10px"/>
+                <!-- img src="<?=Url::to('@web/images/us.png')?>" align="left" style="margin:25px 30px 10px 10px"/ -->
                 <h2>Welcome</h2>
                 
                 <p>
@@ -47,14 +47,40 @@ HomeAsset::register($this);
                 </p>
             </div>
 
-            <div class="col-sm-3" style="margin-top:65px">
-                <div class="row">
-                    <div class="col-xs-12" style="font-size:12px">
-                        <b><span style="color:#fff">Looking for something special?</span></b>
+            <div class="col-sm-3">
 
-                        <p>Tell us what kind of property you are looking for by <a href="<?=Url::to(['site/contact'])?>">contacting us</a>, and we will employ a vast list of contacts and resources, obtained through decades in the business, to find what you desire.</p>
+                <h3>Property Search</h3>
+
+                <form action="<?=Url::to(['property/index'])?>">
+
+                    <label class="label-light" for="property-acres">Acres</label>
+                    <div class="row" style="margin-bottom:10px">
+                        <div class="col-sm-6"><input type="text" name="minAcres" class="form-control control-light" placeholder="Min acres"></div>
+                        <div class="col-sm-6"><input type="text" name="maxAcres" class="form-control control-light" placeholder="Max acres"></div>
                     </div>
-                </div>
+
+                    <label class="label-light" for="property-acres">Price</label>
+                    <div class="row" style="margin-bottom:10px">
+                        <div class="col-sm-6"><input type="text" name="minPrice" class="form-control control-light" placeholder="Min price"></div>
+                        <div class="col-sm-6"><input type="text" name="maxPrice" class="form-control control-light" placeholder="Max price"></div>
+                    </div>
+
+                    <label class="label-light" for="property-acres">Type</label>
+                    <?php
+                        $items = ArrayHelper::map(PropertyType::find()->all(), 'typeId', 'typeName');
+                        $items[''] = 'All';
+                        echo Html::dropDownList('typeId', '', $items, ['class'=>'form-control control-light', 'style'=>'margin-bottom:10px']);
+                    ?>
+
+                    <label class="label-light" for="property-keywords">Keywords</label>
+                    <div class="row" style="margin-bottom:10px">
+                        <div class="col-sm-12"><input type="text" name="keywords" class="form-control control-light" placeholder="Lake"></div>
+                    </div>
+
+                    <br/>
+                    <button type="submit" class="btn btn-primary control-light">Search</button>
+                    
+                </form>
             </div>
         </div><!-- row -->
     </div><!-- container -->
@@ -97,39 +123,13 @@ HomeAsset::register($this);
         </div>
 
         <div class="col-sm-3">
+            <div class="row">
+                <div class="col-xs-12" style="font-size:13px">
+                    <b><span style="color:#fff">Looking for something special?</span></b>
 
-        <h3>Search</h3>
-
-        <form action="<?=Url::to(['property/index'])?>">
-
-            <label class="label-light" for="property-acres">Acres</label>
-            <div class="row" style="margin-bottom:10px">
-                <div class="col-sm-6"><input type="text" name="minAcres" class="form-control control-light" placeholder="Min acres"></div>
-                <div class="col-sm-6"><input type="text" name="maxAcres" class="form-control control-light" placeholder="Max acres"></div>
+                    <p>Tell us what kind of property you are looking for by <a href="<?=Url::to(['site/contact'])?>">contacting us</a>, and we will employ a vast list of contacts and resources, obtained through decades in the business, to find what you desire.</p>
+                </div>
             </div>
-
-            <label class="label-light" for="property-acres">Price</label>
-            <div class="row" style="margin-bottom:10px">
-                <div class="col-sm-6"><input type="text" name="minPrice" class="form-control control-light" placeholder="Min price"></div>
-                <div class="col-sm-6"><input type="text" name="maxPrice" class="form-control control-light" placeholder="Max price"></div>
-            </div>
-
-            <label class="label-light" for="property-acres">Type</label>
-            <?php
-                $items = ArrayHelper::map(PropertyType::find()->all(), 'typeId', 'typeName');
-                $items[''] = 'All';
-                echo Html::dropDownList('typeId', '', $items, ['class'=>'form-control control-light', 'style'=>'margin-bottom:10px']);
-            ?>
-
-            <label class="label-light" for="property-keywords">Keywords</label>
-            <div class="row" style="margin-bottom:10px">
-                <div class="col-sm-12"><input type="text" name="keywords" class="form-control control-light" placeholder="Lake"></div>
-            </div>
-
-            <br/>
-            <button type="submit" class="btn btn-primary control-light">Search</button>
-            
-        </form>
         </div>
     </div>
 </div>
