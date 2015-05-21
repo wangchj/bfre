@@ -47,9 +47,9 @@ HomeAsset::register($this);
                 </p>
             </div>
 
-            <div class="col-sm-3" style="margin-top:65px">
+            <div class="col-sm-3" style="margin-top:25px">
                 <div class="row">
-                    <div class="col-xs-12" style="font-size:12px">
+                    <div class="col-xs-12">
                         <b><span style="color:#fff">Looking for something special?</span></b>
 
                         <p>Tell us what kind of property you are looking for by <a href="<?=Url::to(['site/contact'])?>">contacting us</a>, and we will employ a vast list of contacts and resources, obtained through decades in the business, to find what you desire.</p>
