@@ -37,7 +37,7 @@ LayoutAsset::register($this);
                         <span class="icon-bar"></span>
                     </button>
                     <a href="<?=Url::to(['site/index'])?>">
-                        <img src="<?=Yii::getAlias('@web/images/heading-logo.png')?>" width="245">
+                        <img src="<?=Yii::getAlias('@web/images/heading-logo.png')?>" style="width:250px">
                     </a>
                 </div>
                 <div id="w0-collapse" class="collapse navbar-collapse">
