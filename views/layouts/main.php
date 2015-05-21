@@ -24,7 +24,7 @@ LayoutAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-
+<?php include_once("analyticstracking.php") ?>
 <?php $this->beginBody() ?>
     <div class="wrap">
         <nav id="w0" class="navbar-ana navbar" role="navigation">
