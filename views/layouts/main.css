@@ -18,6 +18,11 @@ nav.navbar {
     font-size:14px;
 }
 
+.navbar-default .navbar-nav li.active a,
+.navbar-default .navbar-nav li.active a:hover {
+    background-color: transparent;
+}
+
 h1
 {
     font-family: 'Baumans', cursive;
