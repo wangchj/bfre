@@ -6,6 +6,8 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 
+use yii\web\AssetBundle;
+
 /* @var $this yii\web\View */
 $this->title = Yii::$app->name . ' Home';
 
@@ -13,29 +15,15 @@ $this->title = Yii::$app->name . ' Home';
 /* @var $property app\models\Property */
 
 HomeAsset::register($this);
+
 ?>
 
-<!-- link href="http://billfowlerrealestate.com/land_agent_web/css/style.css" rel="stylesheet" type="text/css" media="all" / -->
-<!-- link href='http://fonts.googleapis.com/css?family=Baumans' rel='stylesheet' type='text/css' -->
+<div id="map-canvas"></div>
 
-
-<div style="width:100%;
-    /*height:400px;*/
-    /*margin-top:70px;*/
-    padding:20px 0px;
-    background-color:#565249;">
-
+<div>
     <div class="container">
-        <div class="row">
-            <!-- div class="col-sm-3" style="margin-top:25px">
-                
-            </div -->
-            
-            <div class="col-sm-9" style="color: rgb(214, 213, 186);">
-                
-                <img src="<?=Url::to('@web/images/us.png')?>" align="left" style="margin:25px 30px 10px 10px"/>
-                <h2>Welcome</h2>
-                
+        <div class="row" style="margin:35px 0px">
+            <div class="col-xs-12">
                 <p>
                 Bill Fowler Real Estate operates in the Southeastern United Sates and specializes in <i>Land</i>, <i>Commercial Properties</i>, and <i>1031 Tax-Differed Exchanges</i>. For almost five decades in business, our company has experienced the full spectrum of issues involved in every aspect of real estate transactions, some of which were extremely complicated.
                 </p>
@@ -47,89 +35,45 @@ HomeAsset::register($this);
                 </p>
             </div>
 
-            <div class="col-sm-3" style="margin-top:25px">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <b><span style="color:#fff">Looking for something special?</span></b>
-
-                        <p>Tell us what kind of property you are looking for by <a href="<?=Url::to(['site/contact'])?>">contacting us</a>, and we will employ a vast list of contacts and resources, obtained through decades in the business, to find what you desire.</p>
-                    </div>
-                </div>
-            </div>
+            
         </div><!-- row -->
     </div><!-- container -->
 </div>
 
-
-<div class="container" style="padding-top:25px">
-    <div class="row">
-
-        <div class="col-sm-9" style="margin-top:25px">
-            <div class="row">
-                <?php
-                    $properties = Property::getRandomProperties(6);
-                    foreach($properties as $property):
-                ?>
-                <div class="col-sm-4" style="margin-bottom:20px;">
-                    <div style="
-                        background:url(<?=$property->firstPhotoUrl()?>);
-                        background-size:cover;
-                        background-position:center;
-                        position:relative;
-                        overflow:hidden;
-                        padding-bottom:75%" class="imgTile" data-url="<?=Url::to(['property/detail', 'id'=>$property->propId])?>">
-                        <!-- img src="<?=$property->firstPhotoUrl()?>" style="width:100%" / -->
+<div style="background-color:#eeeeee">
+    <div class="container" style="padding-top:25px">
+        <div class="row">
+            <div class="col-xs-12" style="margin-top:25px">
+                <div class="row">
+                    <?php
+                        $properties = Property::getRandomProperties(6);
+                        foreach($properties as $property):
+                    ?>
+                    <div class="col-sm-4" style="margin-bottom:20px;">
+                        <div style="
+                            background:url(<?=$property->firstPhotoUrl()?>);
+                            background-size:cover;
+                            background-position:center;
+                            position:relative;
+                            overflow:hidden;
+                            padding-bottom:75%" class="imgTile" data-url="<?=Url::to(['property/detail', 'id'=>$property->propId])?>">
+                            <!-- img src="<?=$property->firstPhotoUrl()?>" style="width:100%" / -->
+                        </div>
+                        <div style="clear:both; padding:10px; text-align:center">
+                            <a href="<?=Url::to(['property/detail', 'id'=>$property->propId])?>"><?=substr($property->headline, 0, 30)?></a>
+                            <br>
+                            <?php
+                                if(strlen($property->descr) > 50)
+                                    echo substr($property->descr, 0, 50) . 
+                                        Html::a(' more..', ['property/detail', 'id'=>$property->propId]);
+                                else
+                                    echo $property->descr;
+                            ?>
+                        </div>
                     </div>
-                    <div style="clear:both; padding:10px; text-align:center">
-                        <a href="<?=Url::to(['property/detail', 'id'=>$property->propId])?>"><?=substr($property->headline, 0, 30)?></a>
-                        <br>
-                        <?php
-                            if(strlen($property->descr) > 50)
-                                echo substr($property->descr, 0, 50) . 
-                                    Html::a(' more..', ['property/detail', 'id'=>$property->propId]);
-                            else
-                                echo $property->descr;
-                        ?>
-                    </div>
+                    <?php endforeach;?>
                 </div>
-                <?php endforeach;?>
             </div>
-        </div>
-
-        <div class="col-sm-3">
-
-        <h3>Search</h3>
-
-        <form action="<?=Url::to(['property/index'])?>">
-
-            <label class="label-light" for="property-acres">Acres</label>
-            <div class="row" style="margin-bottom:10px">
-                <div class="col-sm-6"><input type="text" name="minAcres" class="form-control control-light" placeholder="Min acres"></div>
-                <div class="col-sm-6"><input type="text" name="maxAcres" class="form-control control-light" placeholder="Max acres"></div>
-            </div>
-
-            <label class="label-light" for="property-acres">Price</label>
-            <div class="row" style="margin-bottom:10px">
-                <div class="col-sm-6"><input type="text" name="minPrice" class="form-control control-light" placeholder="Min price"></div>
-                <div class="col-sm-6"><input type="text" name="maxPrice" class="form-control control-light" placeholder="Max price"></div>
-            </div>
-
-            <label class="label-light" for="property-acres">Type</label>
-            <?php
-                $items = ArrayHelper::map(PropertyType::find()->all(), 'typeId', 'typeName');
-                $items[''] = 'All';
-                echo Html::dropDownList('typeId', '', $items, ['class'=>'form-control control-light', 'style'=>'margin-bottom:10px']);
-            ?>
-
-            <label class="label-light" for="property-keywords">Keywords</label>
-            <div class="row" style="margin-bottom:10px">
-                <div class="col-sm-12"><input type="text" name="keywords" class="form-control control-light" placeholder="Lake"></div>
-            </div>
-
-            <br/>
-            <button type="submit" class="btn btn-primary control-light">Search</button>
-            
-        </form>
         </div>
     </div>
 </div>

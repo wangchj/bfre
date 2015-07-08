@@ -19,8 +19,7 @@ class HomeAsset extends AssetBundle
     public $css =['index.css'];
     public $js =
     [
-        'http://billfowlerrealestate.com/land_agent_web/js/modernizr.js',
-        'http://billfowlerrealestate.com/land_agent_web/js/jquery.flexslider.js',
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyD8Ls8RLsCalFAdQ48dPFQL-dEsgs0mF_E&libraries=geometry&sensor=false',
         'index.js'
     ];
     public $depends = [

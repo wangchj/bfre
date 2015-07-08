@@ -18,7 +18,6 @@ class LayoutAsset extends AssetBundle
     public $sourcePath = '@app/views/layouts';
     public $css =
     [
-        'http://fonts.googleapis.com/css?family=Baumans',
         'main.css'
     ];
     public $js = [];
