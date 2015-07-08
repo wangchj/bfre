@@ -31,3 +31,4 @@ phpunit.phar
 
 runtime
 web/assets
+web/photos
