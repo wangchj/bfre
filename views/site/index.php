@@ -5,7 +5,6 @@ use app\assets\HomeAsset;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
-
 use yii\web\AssetBundle;
 
 /* @var $this yii\web\View */
@@ -15,7 +14,6 @@ $this->title = Yii::$app->name . ' Home';
 /* @var $property app\models\Property */
 
 HomeAsset::register($this);
-
 ?>
 
 <div id="map-canvas"></div>
@@ -51,7 +49,7 @@ HomeAsset::register($this);
                     ?>
                     <div class="col-sm-4" style="margin-bottom:20px;">
                         <div style="
-                            background:url(<?=$property->firstPhotoUrl()?>);
+                            background:url(<?=Yii::$app->photoManager->getUrl($property->firstPhotoUrl())?>);
                             background-size:cover;
                             background-position:center;
                             position:relative;

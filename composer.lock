@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "33e1d5c701a4aac172021b35cb8f4436",
+    "hash": "b27a6fa06de431ea429f49889b1412de",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -346,6 +346,95 @@
             "time": "2013-11-30 08:25:19"
         },
         {
+            "name": "league/plates",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/plates.git",
+                "reference": "814f7005134187d769bd9df74a40d345d675cd04"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/plates/zipball/814f7005134187d769bd9df74a40d345d675cd04",
+                "reference": "814f7005134187d769bd9df74a40d345d675cd04",
+                "shasum": ""
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "v1.2.0",
+                "mockery/mockery": "dev-master@dev",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "League\\Plates\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Reinink",
+                    "email": "jonathan@reinink.ca",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Plates, the native PHP template system that’s fast, easy to use and easy to extend.",
+            "homepage": "http://platesphp.com",
+            "keywords": [
+                "league",
+                "package",
+                "templating"
+            ],
+            "time": "2014-04-02 19:15:11"
+        },
+        {
+            "name": "rize/uri-template",
+            "version": "0.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rize/UriTemplate.git",
+                "reference": "907ca9b59014f18f6c3f1158bdd46a3c1675e9f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rize/UriTemplate/zipball/907ca9b59014f18f6c3f1158bdd46a3c1675e9f0",
+                "reference": "907ca9b59014f18f6c3f1158bdd46a3c1675e9f0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Rize\\UriTemplate": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marut K",
+                    "homepage": "http://twitter.com/rezigned"
+                }
+            ],
+            "description": "PHP URI Template (RFC 6570) supports both expansion & extraction",
+            "keywords": [
+                "RFC 6570",
+                "template",
+                "uri"
+            ],
+            "time": "2014-06-11 06:00:32"
+        },
+        {
             "name": "sendgrid/sendgrid",
             "version": "2.2.1",
             "source": {
@@ -492,17 +581,61 @@
             "time": "2015-06-28 17:20:48"
         },
         {
+            "name": "werx/url",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/werx/url.git",
+                "reference": "ff9edfdaed22c61bd7abc1fb18e40b4a1f2577b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/werx/url/zipball/ff9edfdaed22c61bd7abc1fb18e40b4a1f2577b7",
+                "reference": "ff9edfdaed22c61bd7abc1fb18e40b4a1f2577b7",
+                "shasum": ""
+            },
+            "require": {
+                "league/plates": "2.1.0",
+                "php": ">= 5.4",
+                "rize/uri-template": "0.2.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.4.*",
+                "squizlabs/php_codesniffer": "1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "werx\\Url\\": "src/",
+                    "werx\\Url\\Extensions\\": "src/extensions",
+                    "werx\\Url\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josh Moody",
+                    "email": "jgmoody@gmail.com"
+                }
+            ],
+            "description": "Build urls to resources in your app",
+            "time": "2015-02-17 15:24:23"
+        },
+        {
             "name": "yiisoft/yii2",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "0204c3eba69dfce6d4e867449696afaf1a2fe087"
+                "reference": "d3ea7c0c51f645c04bf6dae6e13339c16f951b58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/0204c3eba69dfce6d4e867449696afaf1a2fe087",
-                "reference": "0204c3eba69dfce6d4e867449696afaf1a2fe087",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/d3ea7c0c51f645c04bf6dae6e13339c16f951b58",
+                "reference": "d3ea7c0c51f645c04bf6dae6e13339c16f951b58",
                 "shasum": ""
             },
             "require": {
@@ -577,7 +710,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-07-07 19:37:05"
+            "time": "2015-07-08 21:17:26"
         },
         {
             "name": "yiisoft/yii2-bootstrap",

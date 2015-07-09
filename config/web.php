@@ -44,6 +44,10 @@ $config = [
             //    '<username>/<id:\d+>' => 'counter/view',
             //    '<username>' => 'counter/index',
             //],
+        ],
+        'photoManager' => [
+            'class' => 'app\components\PhotoManager',
+            'baseUrl' => ''
         ]
     ],
     'params' => $params,
