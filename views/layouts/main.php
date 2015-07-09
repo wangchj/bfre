@@ -27,6 +27,9 @@ LayoutAsset::register($this);
     <div class="wrap">
         <nav id="w0" class="navbar navbar-default" role="navigation">
             <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 top-toolbar">Contact us: <?=Yii::$app->params['phone']?></div>
+                </div>
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w0-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -57,10 +60,6 @@ LayoutAsset::register($this);
                         <?php if(!Yii::$app->user->isGuest): ?>
                         <li><a href="<?=Url::to(['site/logout'])?>" data-method="post">Logout (<?=Yii::$app->user->identity->fname?>)</a></li> 
                         <?php endif;?>
-                    </ul>
-
-                    <ul id="header-contact" class="navbar-nav navbar-right nav">
-                        <li><a href="#"><?=Yii::$app->params['phone']?></a></li>
                     </ul>
                 </div>
             </div>
