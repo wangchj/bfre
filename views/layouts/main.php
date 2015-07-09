@@ -34,7 +34,7 @@ LayoutAsset::register($this);
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/~wangchj/bfmock" style="font-family:'Times New Roman','Times'; color:#555555; font-weight:bold">
+                    <a class="navbar-brand" href="/~wangchj/bfmock" style="font-family:'Times New Roman','Times'; color:#555555; font-weight:bold; margin-right:50px">
                             <div style="font-family:'Times New Roman','Times'; font-weight:bold; color:#555555">
                                 <span style="font-size:32px">B</span><span style="font-size:28px">ILL</span>
                                 <span style="font-size:32px">F</span><span style="font-size:28px">OWLER</span>
@@ -49,7 +49,7 @@ LayoutAsset::register($this);
                     </a>
                 </div>
                 <div id="w0-collapse" class="collapse navbar-collapse">
-                    <ul id="w1" class="navbar-nav navbar-right nav">
+                    <ul id="w1" class="navbar-nav nav">
                         <li class="active"><a href="<?=Url::to(['site/index'])?>">Home</a></li>
                         <li><a href="<?=Url::to(['site/about'])?>">About</a></li>
                         <li><a href="<?=Url::to(['property/index'])?>">Properties</a></li>
@@ -57,6 +57,10 @@ LayoutAsset::register($this);
                         <?php if(!Yii::$app->user->isGuest): ?>
                         <li><a href="<?=Url::to(['site/logout'])?>" data-method="post">Logout (<?=Yii::$app->user->identity->fname?>)</a></li> 
                         <?php endif;?>
+                    </ul>
+
+                    <ul id="header-contact" class="navbar-nav navbar-right nav">
+                        <li><a href="#"><?=Yii::$app->params['phone']?></a></li>
                     </ul>
                 </div>
             </div>
