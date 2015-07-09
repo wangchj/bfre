@@ -65,11 +65,10 @@ LayoutAsset::register($this);
                 </div>
             </div>
         </nav>
-        
-        <?= $content ?>
-        
     </div>
 
+    <?= $content ?>
+        
     <footer class="footer" style="border:0px">
         <div class="container">
             <p class="pull-left">&copy; Bill Fowler Real Estate <?= date('Y') ?></p>
