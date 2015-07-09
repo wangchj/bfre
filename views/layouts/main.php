@@ -69,7 +69,7 @@ LayoutAsset::register($this);
 
     <?= $content ?>
         
-    <footer class="footer" style="border:0px">
+    <footer class="footer">
         <div class="container">
             <p class="pull-left">&copy; Bill Fowler Real Estate <?= date('Y') ?></p>
             <p class="pull-right">Designed by <a href="http://codenuggets.com" target="_blank">codenuggets.com</a></p>
