@@ -23,6 +23,10 @@ nav.navbar {
     background-color: transparent;
 }
 
+.navbar-default .navbar-header button {
+    margin: 25px;
+}
+
 h1
 {
     font-family: 'Baumans', cursive;
