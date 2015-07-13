@@ -9,16 +9,21 @@ use yii\captcha\Captcha;
 
 $this->title = Yii::$app->name . ' Contact';
 ?>
+
+<div style="height:300px; overflow:hidden;">
+    <img style="width:100%; position:relative; top:-250px" src="<?=Yii::getAlias('@web/images/')?>field1.jpg">
+</div>
+
 <div class="container" style="padding-top:0px">
 
     <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
+        <div class="col-md-10 col-md-offset-1">
             
-            <h2>Contact Us</h2>
+            <h1>Contact Us</h1>
 
             <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?> 
-                <div class="alert alert-success">
-                Thank you for contacting us. We will respond to you as soon as possible.
+                <div class="alert alert-success" style="margin-top:30px">
+                    Thank you for contacting us. We will respond to you as soon as possible.
                 </div>
 
                 <!-- p>
@@ -36,7 +41,7 @@ $this->title = Yii::$app->name . ' Contact';
             <?php else: ?>
 
             <p>
-            If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.
+            For business inquiries or other questions, please fill out the following form to contact us. Thank you.
             </p>
             <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
                 <?= $form->field($model, 'name') ?>
@@ -46,7 +51,7 @@ $this->title = Yii::$app->name . ' Contact';
                     'template' => '<div class="row"><div class="col-sm-3">{image}</div><div class="col-sm-6">{input}</div></div>',
                 ]) ?>
                 <div class="form-group">
-                    <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                    <?= Html::submitButton('Send', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                 </div>
             <?php ActiveForm::end(); ?>
             <?php endif; ?>
