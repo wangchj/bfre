@@ -7,6 +7,9 @@ body
     text-align:justify;
 }
 
+a, a:hover {
+    color:#202020;
+}
 nav.navbar {
     margin-bottom: 0px;
 }
