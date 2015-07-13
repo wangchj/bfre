@@ -53,10 +53,14 @@ LayoutAsset::register($this);
                 </div>
                 <div id="w0-collapse" class="collapse navbar-collapse">
                     <ul id="w1" class="navbar-nav nav">
-                        <li class="active"><a href="<?=Url::to(['site/index'])?>">Home</a></li>
-                        <li><a href="<?=Url::to(['site/about'])?>">About</a></li>
-                        <li><a href="<?=Url::to(['property/index'])?>">Properties</a></li>
-                        <li><a href="<?=Url::to(['site/contact'])?>">Contact</a></li>
+                        <?php
+                            $contr = Yii::$app->controller->id;
+                            $route = Yii::$app->controller->route;
+                        ?>
+                        <li class="<?=$route === 'site/index' ? 'active' : ''?>"><a href="<?=Url::to(['site/index'])?>">Home</a></li>
+                        <li class="<?=$route === 'site/about' ? 'active' : ''?>"><a href="<?=Url::to(['site/about'])?>">About</a></li>
+                        <li class="<?=$contr === 'property' ? 'active' : ''?>"><a href="<?=Url::to(['property/index'])?>">Properties</a></li>
+                        <li class="<?=$route === 'site/contact' ? 'active' : ''?>"><a href="<?=Url::to(['site/contact'])?>">Contact</a></li>
                         <?php if(!Yii::$app->user->isGuest): ?>
                         <li><a href="<?=Url::to(['site/logout'])?>" data-method="post">Logout (<?=Yii::$app->user->identity->fname?>)</a></li> 
                         <?php endif;?>
