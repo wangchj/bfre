@@ -7,8 +7,8 @@ $this->title = Yii::$app->name . ' About';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div style="height:350px; overflow:hidden">
-    <img style="width:100%; position:relative; top:-250px" src="http://www.ncwine.org/img/_home/_gallery/feb_time_wine.jpg">
+<div style="height:300px; overflow:hidden">
+    <img style="width:100%; position:relative; top:-230px" src="http://www.ncwine.org/img/_home/_gallery/feb_time_wine.jpg">
 </div>
 
 <div class="container" style="padding-top:0px">
