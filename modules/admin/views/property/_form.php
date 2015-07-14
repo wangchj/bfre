@@ -23,6 +23,7 @@ AddPropertyAsset::register($this);
     <?= $form->field($model, 'typeId')->dropDownList(ArrayHelper::map(PropertyType::find()->all(), 'typeId', 'typeName')) ?>
     <?= $form->field($model, 'descr')->textarea(['rows' => 6]) ?>
     <?= $form->field($model, 'features')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'keywords')->textInput() ?>
     <?= $form->field($model, 'acres')->textInput() ?>
     <?= $form->field($model, 'priceAcre',
         ['template' => "{label}<div class=\"input-group\"><div class=\"input-group-addon\">$</div>{input}</div>{error}"])->textInput() ?>

@@ -18,6 +18,7 @@ use Yii;
  * @property string $headline
  * @property string $descr
  * @property string $features
+ * @property string $keywords
  * @property string $pictures
  * @property double $acres
  * @property double $priceAcre
@@ -41,7 +42,7 @@ class Property extends \yii\db\ActiveRecord
         return [
             [['typeId', 'county', 'state', 'latlon', 'headline', 'descr', 'acres'], 'required'],
             [['typeId'], 'integer'],
-            [['latlon', 'bound', 'descr', 'features', 'pictures', 'priceAcre', 'priceTotal'], 'string'],
+            [['latlon', 'bound', 'descr', 'features', 'keywords', 'pictures', 'priceAcre', 'priceTotal'], 'string'],
             [['address'], 'string', 'max' => 40],
             [['city', 'county'], 'string', 'max' => 20],
             [['state'], 'string', 'max' => 2],
@@ -66,6 +67,7 @@ class Property extends \yii\db\ActiveRecord
             'headline' => 'Headline',
             'descr' => 'Description',
             'features' => 'Special Features',
+            'keywords' => 'Keywords',
             'pictures' => 'Pictures',
             'acres' => 'Acreage',
             'priceAcre' => 'Price Per Acre',

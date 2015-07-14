@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'headline',
             'descr:ntext',
             'features:ntext',
+            'keywords:ntext',
             'address',
             'city',
             'county',

@@ -8,7 +8,7 @@ create table PropertyTypes (
 insert into PropertyTypes(typeName) values('Farming'),('Hunting'),('Timber'),('Development'),('Industrial'),('Commercial'),('Income'),('Development');
 
 create table Properties (
-    propId      integer         primary key auto_increment,
+    propId      integer         not null primary key auto_increment,
     typeId      integer         not null,
     address     varchar(40)     null,
     city        varchar(20)     null,
@@ -19,6 +19,7 @@ create table Properties (
     headline    varchar(100)    not null,
     descr       text            not null,
     features    text            null,
+    keywords    text            null,
     pictures    text            null,
     acres       float           not null,
     priceAcre   float           null,       -- price per acres
