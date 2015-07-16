@@ -37,7 +37,8 @@ $config = [
             'showScriptName' => false,
             'rules' =>
             [
-                'property/state/<state>' => 'property/index'
+                'property/state/<state>' => 'property/index',
+                'property/type/<typeName>' => 'property/type'
             ]
         ],
         'photoManager' => [
