@@ -35,15 +35,10 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            //'rules' =>
-            //[
-            //    'logout' => 'site/logout',
-            //    'login' => 'site/login',
-            //    '<username>/history/<counterId:\d+>' => 'history/index',
-            //    '<username>/history' => 'history/index',
-            //    '<username>/<id:\d+>' => 'counter/view',
-            //    '<username>' => 'counter/index',
-            //],
+            'rules' =>
+            [
+                'property/state/<state>' => 'property/index'
+            ]
         ],
         'photoManager' => [
             'class' => 'app\components\PhotoManager',

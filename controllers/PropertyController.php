@@ -5,11 +5,13 @@ namespace app\controllers;
 use Yii;
 use yii\helpers\Url;
 use app\models\Property;
+use app\models\PropertyType;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use app\components\geonames\UsStates;
 
 /**
  * PropertyController implements the CRUD actions for Property model.
@@ -22,7 +24,7 @@ class PropertyController extends Controller
             'access'=>[
                 'class'=>AccessControl::className(),
                 'rules'=>[
-                    ['allow'=>true, 'actions'=>['index','detail'], 'roles'=>['?','@']],
+                    ['allow'=>true, 'actions'=>['index','detail','type'], 'roles'=>['?','@']],
                 ]
             ],
             'verbs' => [
@@ -40,14 +42,21 @@ class PropertyController extends Controller
      * @return mixed
      */
     public function actionIndex($typeId = null,
+        $typeName = null,
         $minPrice = null, $maxPrice = null, 
         $minAcres = null, $maxAcres = null,
-        $keywords = null)
+        $keywords = null, $state = null)
     {
         $activeQuery = Property::find();
 
-        if($typeId != null && $typeId != '' && is_numeric($typeId))
+        if($typeName && $typeName != '') {
+            $type = PropertyType::find()->where(['typeName'=>$typeName])->one();
+            $activeQuery->where('typeId='. $type->typeId);
+        }
+        else if($typeId && $typeId != '' && is_numeric($typeId)) {
             $activeQuery->where('typeId='. $typeId);
+            $typeName = PropertyType::find($typeId)->typeName;
+        }
 
         if($minPrice != null && $minPrice != '' && is_numeric($minPrice))
             $activeQuery->andWhere('(' . 'priceTotal>=' . $minPrice . ' OR priceAcre>=' . $minPrice . ')');
@@ -64,7 +73,23 @@ class PropertyController extends Controller
         if($keywords != null && $keywords != '')
             $activeQuery->andWhere("match(descr,features) against ('$keywords')");
 
-        return $this->render('index', ['properties' => $activeQuery->all()]);
+        if($state) {
+            $code = UsStates::$ntoc[ucfirst($state)];
+            $activeQuery->andWhere("state='$code'");
+        }
+
+        return $this->render('index', ['properties' => $activeQuery->all(), 'type'=>$typeName]);
+    }
+
+    public function actionType($typeName) {
+        $activeQuery = Property::find();
+
+        if($typeName && $typeName != '') {
+            $type = PropertyType::find()->where(['typeName'=>$typeName])->one();
+            $activeQuery->where('typeId='. $type->typeId);
+        }
+
+        return $this->render('index', ['properties' => $activeQuery->all(), 'type'=>$typeName]);
     }
 
     /**

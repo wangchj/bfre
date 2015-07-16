@@ -9,108 +9,127 @@ use app\models\PropertyType;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::$app->name . ' Properties';
+$photoManager = Yii::$app->photoManager;
 
 setlocale(LC_MONETARY, 'en_US');
 
 ?>
-<div class="container" style="padding-top:0px">
+
+<!-- div style="
+    /*background-color: #6f5499;*/
+    background-color:#efefef;
+    padding-top:30px;
+    padding-bottom: 40px;
+    margin-bottom:30px;
+    border-bottom: 1px solid #ddd   ">
+    <div class="container">
+        <h1 style="text-shadow: 0px 1px 1px #444;">Land and Properties for Sale</h1>
+    </div>
+</div -->
+
+<div class="container" style="padding-top:0px; margin-top:30px">
 
     <!-- h1><?= Html::encode($this->title) ?></h1 -->
 
     <div class="row">
+        <div class="col-md-9">
+            <!-- col-xs-12 allows left and right padding -->
+            <div class="col-xs-12">
+                <!-- h1 style="margin-bottom:30px">Properties for Sale</h1 -->
 
-        <div class="col-sm-9">
+                <?php if(count($properties) == 0) echo 'No properties found. Please refine your search.'; ?>
 
-            <h2 style="margin-bottom:30px">Properties</h2>
+                <?php foreach($properties as $property):?>
 
-            <?php if(count($properties) == 0) echo 'No properties found. Please refine your search.'; ?>
-
-            <?php foreach($properties as $property):?>
-
-                <div class="row property_root" style="margin-bottom:25px; padding-bottom:25px; border-bottom:1px dotted">
-                    
-                    <div class="col-sm-5">
-                        <!-- Photo -->
-                        <img src="<?=getFirstPhotoUrl($property)?>" class="img-thumbnail"/>
-                    </div>
-
-                    <div class="col-sm-7">
-                            
-                            <!-- Property Headline -->
-                            <div class="property_headline" style="font-size:18px">
-                                <a href="<?=Url::to(['property/detail', 'id'=>$property->propId])?>"><?=$property->headline?></a>
+                    <div class="property_root" style="margin-bottom:30px;">
+                        
+                        <!-- Property Heading -->
+                        <div class="row" style="background-color:#dfebf9; border-top:1px solid #82a7d8">
+                            <div class="col-xs-12 property_headline">
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <h2><a href="<?=Url::to(['property/detail', 'id'=>$property->propId])?>" style="text-decoration:none"><?=$property->headline?></a></h2>
+                                    </div>
+                                    <div class="col-xs-3 pull-right" style="text-align:right; margin-top:20px">
+                                        <?=number_format($property->acres)?> acres
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        <!-- Property address, city, county, state -->
+                                        <!--div class="property_state" style="margin-bottom:10px" -->
+                                            <?php /*if($property->address != null):?><?=$property->address?>, <?php endif;*/?>
+                                            <?php if($property->city != null):?><?=$property->city?>,<?php endif;?>
+                                            <?=$property->county?>, <?=$property->state?>
+                                        <!-- /div -->
+                                    </div>
+                                    <div class="col-xs-4" style="text-align:right">
+                                        <?php if($property->priceAcre != null):?>
+                                            $<?=number_format($property->priceAcre)?> per acre
+                                        <?php else:?>
+                                            $<?=number_format($property->priceTotal)?>
+                                        <?php endif;?>
+                                    </div>
+                                </div>
                             </div>
-
-                            <!-- Property address, city, county, state -->
-                            <div class="property_state" style="margin-bottom:10px">
-                                <?php if($property->address != null):?><?=$property->address?>, <?php endif;?>
-                                <?php if($property->city != null):?><?=$property->city?>,<?php endif;?>
-                                <?=$property->county?>, <?=$property->state?>
-                            </div>
-
-                            <?php
-                                if(strlen($property->descr) > 500)
-                                    echo substr($property->descr, 0, 500) . 
-                                        Html::a(' more..', ['property/detail', 'id'=>$property->propId]);
-                                else
-                                    echo $property->descr;
-                            ?>
-                        <div style="margin-top:10px">
-                            <?=number_format($property->acres,2)?> acres |
-                            <?php if($property->priceAcre != null):?>
-                                $<?=number_format($property->priceAcre)?> per acre
-                            <?php else:?>
-                                $<?=number_format($property->priceTotal)?>
-                            <?php endif;?>
                         </div>
+
+                        <div class="row" style="background-color:#eff5fd">
+                            <div class="col-sm-4" style="padding:0px; background-color:#eee">
+                                <?php
+                                    $photos = $property->allPhotoUrl();
+                                ?>
+                                <?php if($photos && $photos[0]):?>
+                                    <div style="
+                                        background:url(<?=$photoManager->getUrl($photos[0])?>);
+                                        background-size:cover;
+                                        background-position:center;
+                                        position:relative;
+                                        overflow:hidden;
+                                        padding-bottom:75%" class="imgTile" data-url="<?=Url::to(['property/detail', 'id'=>$property->propId])?>">
+                                    </div>
+                                <?php endif;?>
+                            </div>
+                            <div class="col-sm-8" style="overflow:hidden">
+                                <?php
+                                    if(strlen($property->descr) > 400)
+                                        echo substr($property->descr, 0, 400) . 
+                                            Html::a(' more..', ['property/detail', 'id'=>$property->propId]);
+                                    else
+                                        echo $property->descr;
+                                ?>
+                            </div>
+                        </div> 
                     </div>
-                </div>
-            <?php endforeach;?>
+
+                <?php endforeach;?>
+            </div>
         </div>
 
-        <div class="col-sm-3" style="margin-top:20px">
-            <h3>Search</h3>
+        <div class="col-md-3 small">
+            <?php
+                $params = Yii::$app->controller->actionParams;
+                $state = array_key_exists('state', $params) ? ucfirst($params['state']) : null;
+            ?>
 
-            <form action="<?=Url::to(['property/index'])?>">
+            <b>Properties by State</b>
+            <ul style="list-style-type:none; padding-left:10px">
+                <li><div class="<?=$state === 'Alabama' ? 'tri-active' : 'tri'?>"></div><a href="<?=Url::to(['property/index', 'state'=>'Alabama'])?>">Alabama</a></li>
+                <li><div class="<?=$state === 'Georgia' ? 'tri-active' : 'tri'?>"></div><a href="<?=Url::to(['property/index', 'state'=>'Georgia'])?>">Georgia</a></li>
+                <li><div class="<?=$state === 'Tennessee' ? 'tri-active' : 'tri'?>"></div><a href="<?=Url::to(['property/index', 'state'=>'Tennessee'])?>">Tennessee</a></li>
+            </ul>
 
-                <label class="label-light" for="property-acres">Acres</label>
-                <div class="row" style="margin-bottom:10px">
-                    <div class="col-sm-6"><input type="text" name="minAcres" class="form-control control-light" placeholder="Min acres" <?php if(isset($_REQUEST['minAcres'])):?>value="<?=$_REQUEST['minAcres']?>"<?php endif;?>></div>
-                    <div class="col-sm-6"><input type="text" name="maxAcres" class="form-control control-light" placeholder="Max acres" <?php if(isset($_REQUEST['minAcres'])):?>value="<?=$_REQUEST['maxAcres']?>"<?php endif;?>></div>
-                </div>
-
-                <label class="label-light" for="property-acres">Price</label>
-                <div class="row" style="margin-bottom:10px">
-                    <div class="col-sm-6"><input type="text" name="minPrice" class="form-control control-light" placeholder="Min price" <?php if(isset($_REQUEST['minPrice'])):?>value="<?=$_REQUEST['minPrice']?>"<?php endif;?>></div>
-                    <div class="col-sm-6"><input type="text" name="maxPrice" class="form-control control-light" placeholder="Max price" <?php if(isset($_REQUEST['maxPrice'])):?>value="<?=$_REQUEST['maxPrice']?>"<?php endif;?>></div>
-                </div>
-
-                <label class="label-light" for="property-acres">Type</label>
-                <?php
-                    $items = ArrayHelper::map(PropertyType::find()->all(), 'typeId', 'typeName');
-                    $items[''] = 'All';
-                    echo Html::dropDownList('typeId',  isset($_REQUEST['typeId']) ? $_REQUEST['typeId'] : '', $items, ['class'=>'form-control control-light','style'=>'margin-bottom:10px']);
-                ?>
-
-                <label class="label-light" for="property-keywords">Keywords</label>
-                <div class="row" style="margin-bottom:10px">
-                <div class="col-sm-12"><input type="text" name="keywords" class="form-control control-light" placeholder="Lake" <?php if(isset($_REQUEST['keywords'])):?>value="<?=$_REQUEST['keywords']?>"<?php endif;?>></div>
-                </div>
-
-                <br/>
-                <button type="submit" class="btn btn-primary control-light">Search</button>
-                
-            </form>
+            <b>Properties by Type</b>
+            <ul style="list-style-type:none; padding-left:10px">
+                <li><div class="<?=$type === 'Commercial' ? 'tri-active' : 'tri'?>"></div><a href="<?=Url::to(['property/type', 'typeName'=>'Commercial'])?>">Commercial</a></li>
+                <li><div class="<?=$type === 'Development' ? 'tri-active' : 'tri'?>"></div><a href="<?=Url::to(['property/type', 'typeName'=>'Development'])?>">Development</a></li>
+                <li><div class="<?=$type === 'Farming' ? 'tri-active' : 'tri'?>"></div><a href="<?=Url::to(['property/type', 'typeName'=>'Farming'])?>">Farming</a></li>
+                <li><div class="<?=$type === 'Hunting' ? 'tri-active' : 'tri'?>"></div><a href="<?=Url::to(['property/type', 'typeName'=>'Hunting'])?>">Hunting</a></li>
+                <li><div class="<?=$type === 'Income' ? 'tri-active' : 'tri'?>"></div><a href="<?=Url::to(['property/type', 'typeName'=>'Income'])?>">Income</a></li>
+                <li><div class="<?=$type === 'Industrial' ? 'tri-active' : 'tri'?>"></div><a href="<?=Url::to(['property/type', 'typeName'=>'Industrial'])?>">Industrial</a></li>
+                <li><div class="<?=$type === 'Timber' ? 'tri-active' : 'tri'?>"></div><a href="<?=Url::to(['property/type', 'typeName'=>'Timber'])?>">Timber</a></li>
+            </ul>            
         </div>
+
     </div>
 </div>
-
-<?php
-function getFirstPhotoUrl($property)
-{
-    if($property == null || $property->pictures == null || $property->pictures == '')
-        return null;
-    $pos = strpos($property->pictures, "\n");
-    return substr($property->pictures, 0, $pos);
-}
-?>

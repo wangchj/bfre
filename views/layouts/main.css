@@ -8,7 +8,7 @@ body
 }
 
 a, a:hover {
-    color:#202020;
+    color:#404040;
 }
 nav.navbar {
     margin-bottom: 0px;
@@ -41,13 +41,11 @@ nav.navbar {
 h1
 {
     font-size:1.2;
-    text-shadow: 0px 1px 0px rgb(10, 10, 10);
 }
 
 h2
 {
-    font-size:1.2;
-    text-shadow: 0px 1px 0px rgb(10, 10, 10);
+    font-size:1.1;
 }
 
 h3
@@ -85,4 +83,27 @@ label.label-light
 .carousel-indicators li.active
 {
     background-color: rgba(227, 232, 41, 0.7);
+}
+
+.small {
+    font-size: 16px;
+}
+
+.small .tri { 
+    border: 0px transparent none; 
+    display: inline-block;
+    height: 0px;  
+    width: 5px;
+    margin-right:5px;
+}
+
+.small .tri-active {
+    border-color: transparent #707070;  
+    border-style: solid;  
+    border-width: 5px 0 5px 5px;  
+    display: inline-block;
+    height: 10px;  
+    width: 5px;
+    margin-bottom: 1px;
+    margin-right:5px;
 }
