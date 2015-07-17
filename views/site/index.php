@@ -76,3 +76,23 @@ HomeAsset::register($this);
     </div>
 </div>
 
+<?php
+    $props = Property::find()->all();
+    $markers = [];
+    foreach($props as $prop) {
+        $markers[] = [
+            'headline'=>$prop->headline,
+            'city'=>$prop->city,
+            'county'=>$prop->county,
+            'state'=>$prop->state,
+            'latlon'=>$prop->latlon,
+            'acres'=>$prop->acres,
+            'url'=>Url::to(['property/detail', 'id'=>$prop->propId])
+        ];
+    }
+    $json = json_encode($markers);
+?>
+
+<script type="text/javascript">
+    var markerPoints = <?=$json?>;
+</script>
