@@ -10,6 +10,7 @@ use app\assets\PropertyDetailAsset;
 PropertyDetailAsset::register($this);
 
 $this->title = Yii::$app->name . ' property';
+$photoManager = Yii::$app->photoManager;
 ?>
 <div class="container" style="padding-top:0px">
 
@@ -38,7 +39,7 @@ $this->title = Yii::$app->name . ' property';
                     $photoUrls = $property->allPhotoUrl();
                     for($i = 0; $i < count($photoUrls); $i++):?>
                     <div class="item <?php if($i == 0) echo 'active'?>">
-                        <img src="<?php echo $photoUrls[$i]?>" />
+                        <img src="<?=$photoManager->getUrl($photoUrls[$i])?>" />
                     </div>
                     <?php endfor;?>
                 </div>
