@@ -11,7 +11,7 @@ $this->title = Yii::$app->name . ' Contact';
 ?>
 
 <div style="height:300px; overflow:hidden;">
-    <img style="width:100%; position:relative; top:-250px" src="<?=Yii::getAlias('@web/images/')?>field1.jpg">
+    <img style="width:100%; position:relative; top:-250px; min-width:1050px" src="<?=Yii::getAlias('@web/images/')?>field1.jpg">
 </div>
 
 <div class="container" style="padding-top:0px">
