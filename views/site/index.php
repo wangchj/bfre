@@ -16,7 +16,10 @@ $this->title = Yii::$app->name . ' Home';
 HomeAsset::register($this);
 ?>
 
-<div id="map-canvas"></div>
+<div style="height:300px; overflow:hidden">
+    <!-- img style="width:100%; position:relative; top:-220px" src="http://www.jellystonemaryland.com/Websites/jsmd/images/MarylandVineyard.jpg" -->
+    <img style="width:100%; position:relative; top:-250px; left:0px" src="http://www.ednavalleyvineyard.com/sites/default/files/homepage-slides/slide_2.jpg">
+</div>
 
 <div>
     <div class="container">
