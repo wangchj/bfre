@@ -18,13 +18,16 @@ HomeAsset::register($this);
 
 <div style="height:300px; overflow:hidden">
     <!-- img style="width:100%; position:relative; top:-220px" src="http://www.jellystonemaryland.com/Websites/jsmd/images/MarylandVineyard.jpg" -->
-    <img style="width:100%; position:relative; top:-250px; left:0px" src="http://www.ednavalleyvineyard.com/sites/default/files/homepage-slides/slide_2.jpg">
+    <img style="width:100%; position:relative; top:-220px; left:0px; min-width:1268px" src="http://www.ednavalleyvineyard.com/sites/default/files/homepage-slides/slide_2.jpg">
 </div>
 
 <div>
     <div class="container">
         <div class="row" style="margin:35px 0px">
-            <div class="col-xs-12">
+            <div class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-0" style="text-align:center; margin-top:25px; margin-bottom:25px">
+                <img class="img-circle img-thumbnail" style="width:100%; box-shadow:0px 0px 9px #999" src="<?=Yii::getAlias('@web/images/southeast.png')?>">
+            </div>
+            <div class="col-xs-12 col-md-8">
                 <p>
                 Bill Fowler Real Estate operates in the Southeastern United Sates and specializes in <i>Land</i>, <i>Commercial Properties</i>, and <i>1031 Tax-Differed Exchanges</i>. For almost five decades in business, our company has experienced the full spectrum of issues involved in every aspect of real estate transactions, some of which were extremely complicated.
                 </p>
