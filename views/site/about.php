@@ -8,7 +8,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div style="height:300px; overflow:hidden">
-    <img style="width:100%; position:relative; top:-230px" src="http://www.ncwine.org/img/_home/_gallery/feb_time_wine.jpg">
+    <img style="width:100%; position:relative; top:-230px; min-width:1187px" src="http://www.ncwine.org/img/_home/_gallery/feb_time_wine.jpg">
 </div>
 
 <div class="container" style="padding-top:0px">
