@@ -31,7 +31,7 @@ LayoutAsset::register($this);
                     <div class="col-xs-12 top-toolbar">Contact us: <?=Yii::$app->params['phone']?></div>
                 </div>
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w0-collapse">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#w0-collapse" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -52,7 +52,7 @@ LayoutAsset::register($this);
                     </a>
                 </div>
                 <div id="w0-collapse" class="collapse navbar-collapse">
-                    <ul id="w1" class="navbar-nav nav">
+                    <ul class="nav navbar-nav">
                         <?php
                             $contr = Yii::$app->controller->id;
                             $route = Yii::$app->controller->route;
