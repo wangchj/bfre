@@ -24,44 +24,53 @@ $photoManager = Yii::$app->photoManager;
 <h2><?=$property->headline?></h2>
 
     <div class="row">
-        <div class="col-sm-6" style="margin-top:20px">
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="5000">
-                <ol class="carousel-indicators" style="bottom:0px;margin-bottom:5px">
-                    <?php
-                    $photoUrls = $property->allPhotoUrl();
-                    for($i = 0; $i < count($photoUrls); $i++):?>
-                    <li data-target="#carousel-example-generic" data-slide-to="<?=$i?>" <?php if($i == 0) echo 'class="active"'?>></li>
-                    <?php endfor;?>
-                </ol>
-                
-                <div class="carousel-inner" role="listbox">
-                    <?php
-                    $photoUrls = $property->allPhotoUrl();
-                    for($i = 0; $i < count($photoUrls); $i++):?>
-                    <div class="item <?php if($i == 0) echo 'active'?>">
-                        <img src="<?=$photoManager->getUrl($photoUrls[$i])?>" />
+        <div class="col-xs-12" style="margin-top:20px">
+            <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 960px;
+                height: 480px; background: #191919; overflow: hidden; margin:0 auto">
+
+                <!-- Loading Screen -->
+                <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+                    <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                        background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;">
                     </div>
-                    <?php endfor;?>
+                    <div style="position: absolute; display: block; background: url(../images/jssor/loading.gif) no-repeat center center;
+                        top: 0px; left: 0px;width: 100%;height:100%;">
+                    </div>
                 </div>
+
+                <!-- Slides Container -->
+                <div u="slides" style="cursor: move; position: absolute; left: 240px; top: 0px; width: 720px; height: 480px; overflow: hidden;">
+                    <?php $photos = $property->allPhotoUrl()?>
+                    <?php foreach($photos as $photo):?>
+                        <div>
+                            <img u="image" src="<?=$photoManager->getUrl($photo)?>" />
+                            <img u="thumb" src="<?=$photoManager->getUrl($photo)?>" />
+                        </div>
+                    <?php endforeach?>
+                </div>
+
+                 <!-- Arrow Left -->
+                <span u="arrowleft" class="jssora05l" style="top: 158px; left: 248px;">
+                </span>
+                <!-- Arrow Right -->
+                <span u="arrowright" class="jssora05r" style="top: 158px; right: 8px">
+                </span>
+
+                <!-- thumbnail navigator container -->
+                <div u="thumbnavigator" class="jssort02" style="left: 0px; bottom: 0px;">
+                    <!-- Thumbnail Item Skin Begin -->
+                    <div u="slides" style="cursor: default;">
+                        <div u="prototype" class="p">
+                            <div class=w><div u="thumbnailtemplate" class="t"></div></div>
+                            <div class=c></div>
+                        </div>
+                    </div>
+                    <!-- Thumbnail Item Skin End -->
+                </div>
+                <!--#endregion Thumbnail Navigator Skin End -->
+
             </div>
         </div>
-
-        <div class="col-sm-6" style="margin-top:20px"><table class="table">
-        <?php if($property->address!=null):?><tr><th>Street Address</th><td><?=$property->address?></td></tr><?php endif;?>
-        <tr><th>City</th><td><?=$property->city?></td></tr>
-        <tr><th>County</th><td><?=$property->county?></td></tr>
-        <tr><th>State</th><td><?=$property->state?></td></tr>
-        <tr><th>Size</th><td><?=$property->acres?> acres</td></tr>
-        
-        <?php if($property->priceAcre != null):?>
-        <tr><th>Price Per Acre</th><td>$<?=number_format($property->priceAcre)?></td></tr>
-        <?php endif;?>
-
-        <?php if($property->priceTotal != null):?>
-        <tr><th>Total Price</th><td>$<?=number_format($property->priceTotal)?></td></tr>
-        <?php endif;?>
-        
-        </table></div>
     </div>
 
     <div class="row"><div class="col-sm-12" style="margin-top:20px">
