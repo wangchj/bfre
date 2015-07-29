@@ -9,7 +9,7 @@ class PropertyDetailAsset extends AssetBundle
     public $sourcePath = '@app/views/property';
     public $css =
     [
-        //'detail.css'
+        'detail.css'
     ];
     public $js =
     [
@@ -20,5 +20,6 @@ class PropertyDetailAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapPluginAsset',
+        'app\assets\JssorAsset'
     ];
 }
