@@ -25,7 +25,7 @@ HomeAsset::register($this);
     <div class="container">
         <div class="row" style="margin:35px 0px">
             <div class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-0" style="text-align:center; margin-top:25px; margin-bottom:25px">
-                <img class="img-circle img-thumbnail" style="width:100%; box-shadow:0px 0px 9px #999" src="<?=Yii::getAlias('@web/images/southeast.png')?>">
+                <img class="img-circle img-thumbnail" style="width:100%; box-shadow:0px 0px 9px #bbb" src="<?=Yii::getAlias('@web/images/southeast.png')?>">
             </div>
             <div class="col-xs-12 col-md-8">
                 <p>
