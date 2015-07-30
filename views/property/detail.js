@@ -63,10 +63,7 @@ function initMap() {
         center: latLng,
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        //mapTypeControl: false,
-        //panControl: false,
-        //streetViewControl: false,
-        //zoomControl: false
+        scrollwheel: false
     };
     map = new google.maps.Map(document.getElementById("map"), myOptions);
     marker = new google.maps.Marker({position:latLng, map:map});
