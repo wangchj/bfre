@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "Properties".
  *
  * @property integer $propId
- * @property integer $typeId
  * @property string $address
  * @property string $city
  * @property string $county
@@ -23,6 +22,9 @@ use Yii;
  * @property double $acres
  * @property double $priceAcre
  * @property double $priceTotal
+ *
+ * @property PropertyTypeMap[] $propertyTypeMaps
+ * @property PropertyType[] $types
  */
 class Property extends \yii\db\ActiveRecord
 {
@@ -40,8 +42,7 @@ class Property extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['typeId', 'county', 'state', 'latlon', 'headline', 'descr', 'acres'], 'required'],
-            [['typeId'], 'integer'],
+            [['county', 'state', 'latlon', 'headline', 'descr', 'acres'], 'required'],
             [['latlon', 'bound', 'descr', 'features', 'keywords', 'pictures', 'priceAcre', 'priceTotal'], 'string'],
             [['address'], 'string', 'max' => 40],
             [['city', 'county'], 'string', 'max' => 20],
@@ -57,7 +58,6 @@ class Property extends \yii\db\ActiveRecord
     {
         return [
             'propId' => 'Prop ID',
-            'typeId' => 'Property Type',
             'address' => 'Address',
             'city' => 'City',
             'county' => 'County',
@@ -72,12 +72,32 @@ class Property extends \yii\db\ActiveRecord
             'acres' => 'Acreage',
             'priceAcre' => 'Price Per Acre',
             'priceTotal' => 'Total Price',
+            'typeList' => 'Property Type'
         ];
     }
 
-    public function getType()
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPropertyTypeMaps()
     {
-        return $this->hasOne(PropertyType::className(), ['typeId'=>'typeId']);
+        return $this->hasMany(PropertyTypeMap::className(), ['propId' => 'propId']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTypes()
+    {
+        return $this->hasMany(PropertyType::className(), ['typeId' => 'typeId'])->viaTable('PropertyTypeMaps', ['propId' => 'propId']);
+    }
+
+    public function isType($typeId)
+    {
+        foreach($this->types as $type)
+            if($type->typeId == $typeId)
+                return true;
+        return false;
     }
 
     /**
@@ -127,5 +147,16 @@ class Property extends \yii\db\ActiveRecord
         if($this->pictures == null || $this->pictures == '')
             return null;
         return explode("\n", $this->pictures);
+    }
+
+    function getTypeStr()
+    {
+        $res = '';
+        for($i = 0; $i < count($this->types); $i++) {
+            $res .= $this->types[$i]->typeName;
+            if($i != count($this->types) - 1)
+                $res .= ', ';
+        }
+        return $res;
     }
 }

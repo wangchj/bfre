@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'propId',
-            ['label'=>'Type', 'value'=>$model->type->typeName],
+            ['label'=>'Type', 'value'=>$model->getTypeStr()],
             'headline',
             'descr:ntext',
             'features:ntext',

@@ -2,9 +2,11 @@
 
 namespace app\modules\admin\controllers;
 
+use Exception;
 use Yii;
 use yii\helpers\Url;
 use app\models\Property;
+use app\models\PropertyTypeMap;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -77,11 +79,14 @@ class PropertyController extends Controller
             $model->acres = str_replace(',', '', $model->acres);
             $model->priceAcre = str_replace(',', '', $model->priceAcre);
             $model->priceTotal = str_replace(',', '', $model->priceTotal);
-            
+            $this->addTypes($model);
             $this->addPhoto($model);
             
             if($model->save())
+            {
+                $this->addTypes($model);
                 return $this->redirect(['view', 'id' => $model->propId]);
+            }
         }
         
         return $this->render('create', ['model' => $model]); 
@@ -103,6 +108,7 @@ class PropertyController extends Controller
             $model->priceAcre = str_replace(',', '', $model->priceAcre);
             $model->priceTotal = str_replace(',', '', $model->priceTotal);
 
+            $this->updateTypes($model);
             $this->updatePhoto($model);
             $this->addPhoto($model);
 
@@ -126,6 +132,67 @@ class PropertyController extends Controller
             return false;
         }
         return true;
+    }
+
+    private function addTypes($property)
+    {
+        $types = $_POST['typelist'];
+        foreach($types as $type)
+        {
+            $m = new PropertyTypeMap();
+            $m->propId = $property->propId;
+            $m->typeId = $type;
+            $m->save();
+        }
+    }
+
+    private function updateTypes($property)
+    {
+        if(!isset($_POST['typelist']) || !$_POST['typelist'])
+            return;
+
+        $appendList = [];
+        $deleteList = [];
+
+        //Construct append list
+        foreach($_POST['typelist'] as $typeId) {
+            $found = false;
+            foreach($property->types as $type) {
+                if($typeId == $type->typeId) {
+                    $found = true;
+                    break;
+                }
+            }
+            if(!$found)
+                $appendList[] = $typeId;
+        }
+
+        //Construct delete list
+        foreach($property->types as $type) {
+            $found = false;
+            foreach($_POST['typelist'] as $typeId) {
+                if($typeId == $type->typeId) {
+                    $found = true;
+                    break;
+                }
+            }
+            if(!$found)
+                $deleteList[] = $type->typeId;
+        }
+
+        foreach($deleteList as $typeId) {
+            $m = PropertyTypeMap::findOne(['propId'=>$property->propId, 'typeId'=>$typeId]);
+            if(!$m)
+                continue;
+            $m->delete();
+        }
+
+        foreach($appendList as $typeId) {
+            $m = new PropertyTypeMap();
+            $m->propId = $property->propId;
+            $m->typeId = $typeId;
+            $m->save();
+        }
     }
 
     /**
@@ -204,8 +271,10 @@ class PropertyController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $prop = $this->findModel($id);
+        foreach($prop->propertyTypeMaps as $typeMap)
+            $typeMap->delete();
+        $prop->delete();
         return $this->redirect(['index']);
     }
 

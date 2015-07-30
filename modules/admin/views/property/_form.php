@@ -20,7 +20,16 @@ AddPropertyAsset::register($this);
     <h2>Description</h2>
 
     <?= $form->field($model, 'headline')->textInput(['maxlength' => 100]) ?>
-    <?= $form->field($model, 'typeId')->dropDownList(ArrayHelper::map(PropertyType::find()->all(), 'typeId', 'typeName')) ?>
+
+    <div class="form-group">
+        <label class="control-label" for="property-typelist">Property Type</label>
+        <select id="property-typelist" class="form-control" name="typelist[]" multiple="multiple" size="7">
+            <?php foreach(PropertyType::find()->all() as $type):?>
+                <option value="<?=$type->typeId?>" <?=!$model->isNewRecord && $model->isType($type->typeId) ? 'selected' : ''?>><?=$type->typeName?></option>
+            <?php endforeach;?>
+        </select>
+    </div>
+
     <?= $form->field($model, 'descr')->textarea(['rows' => 6]) ?>
     <?= $form->field($model, 'features')->textarea(['rows' => 6]) ?>
     <?= $form->field($model, 'keywords')->textInput() ?>

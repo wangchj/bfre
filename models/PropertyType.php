@@ -9,6 +9,9 @@ use Yii;
  *
  * @property integer $typeId
  * @property string $typeName
+ *
+ * @property PropertyTypeMap[] $propertyTypeMaps 
+ * @property Property[] $props 
  */
 class PropertyType extends \yii\db\ActiveRecord
 {
@@ -41,4 +44,20 @@ class PropertyType extends \yii\db\ActiveRecord
             'typeName' => 'Type Name',
         ];
     }
+
+     /** 
+    * @return \yii\db\ActiveQuery 
+    */ 
+    public function getPropertyTypeMaps() 
+    { 
+        return $this->hasMany(PropertyTypeMap::className(), ['typeId' => 'typeId']); 
+    } 
+ 
+    /** 
+     * @return \yii\db\ActiveQuery 
+     */ 
+    public function getProperties() 
+    { 
+        return $this->hasMany(Property::className(), ['propId' => 'propId'])->viaTable('PropertyTypeMaps', ['typeId' => 'typeId']); 
+    } 
 }

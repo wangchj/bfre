@@ -20,13 +20,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
+            'propId',
             'headline',
-            ['label'=>'Type',
-                'value'=> function ($property){
-                    return $property->type->typeName;
-                }
-            ],
-            'address',
+            //['label'=>'Type',
+            //    'value'=> function ($property){
+            //        return $property->types[0]->typeName;
+            //    }
+            //],
+            //'address',
             'city',
             'county',
             'state',

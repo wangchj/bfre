@@ -42,7 +42,9 @@ $photoManager = Yii::$app->photoManager;
 
                 <tr>
                     <td class="l">Type</td>
-                    <td><?=$property->type->typeName?></td>
+                    <td>
+                        <?=$property->getTypeStr()?>
+                    </td>
                     <td class="l">Acreage</td>
                     <td><?=$property->acres?> acres</td>
                 </tr>
