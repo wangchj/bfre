@@ -2,6 +2,11 @@
     border-top:0px
 }
 
+.table > tbody > tr> td.l {
+    font-size:18px;
+    color:#999;
+}
+
 /* jssor slider arrow navigator skin 05 css */
 /*
 .jssora05l                  (normal)

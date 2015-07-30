@@ -26,35 +26,35 @@ $photoManager = Yii::$app->photoManager;
             <table class="table">
                 <?php if($property->address!=null):?>
                     <tr>
-                        <th>Address</th>
+                        <td class="l">Address</td>
                         <td><?=$property->address?></td>
-                        <th>City</th>
+                        <td class="l">City</td>
                         <td><?=$property->city?></td>
                     </tr>
                 <?php endif;?>
                 
                 <tr>
-                    <th>County</th>
+                    <td class="l">County</td>
                     <td><?=$property->county?></td>
-                    <th>State</th>
+                    <td class="l">State</td>
                     <td><?=UsStates::$cton[$property->state]?></td>
                 </tr>
 
                 <tr>
-                    <th>Type</th>
+                    <td class="l">Type</td>
                     <td><?=$property->type->typeName?></td>
-                    <th>Acreage</th>
+                    <td class="l">Acreage</td>
                     <td><?=$property->acres?> acres</td>
                 </tr>
                 
                 <?php if($property->priceAcre || $property->priceTotal):?>
                     <tr>
                         <?php if($property->priceAcre):?>
-                            <th>Price Per Acre</th>
+                            <td class="l">Price Per Acre</td>
                             <td>$<?=number_format($property->priceAcre)?></td>
                         <?php endif;?>
                         <?php if($property->priceTotal):?>
-                            <th>Total Price</th>
+                            <td class="l">Total Price</td>
                             <td>$<?=number_format($property->priceTotal)?></td>
                         <?php endif;?>
                     </tr>
