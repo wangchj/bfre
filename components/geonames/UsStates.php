@@ -131,4 +131,28 @@ class UsStates {
         'Armed Forces Pacific'=>'AP',
         'Armed Forces Americas (except Canada)'=>'AA'
     );
+
+    /**
+     * @param $c State code
+     * @return Corresponding state name or null if code is invalid.
+     */
+    public static function cton($c) {
+        $c = strtoupper(trim($c));
+        if(array_key_exists($c, self::$cton))
+            return self::$cton[$c];
+        else
+            return null;
+    }
+
+    /**
+     * @param $c State name
+     * @return Corresponding state code or null if name is invalid.
+     */
+    public static function ntoc($n) {
+        $n = ucfirst(strtolower(trim($n)));
+        if(array_key_exists($n, self::$ntoc))
+            return self::$ntoc[$n];
+        else
+            return null;
+    }
 }

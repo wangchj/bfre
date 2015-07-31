@@ -4,13 +4,16 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\assets\PropertyDetailAsset;
 use app\components\geonames\UsStates;
+use app\components\Keywords;
 
 /* @var $this yii\web\View */
 /* @var $property app\models\Property */
 
 PropertyDetailAsset::register($this);
 
-$this->title = Yii::$app->name . ' property';
+$this->title = "$property->headline for sale in $property->city, $property->county County, " . UsStates::cton($property->state) . ' - Bill Fowler Real Estate';
+$this->registerMetaTag(['name'=>'keywords', 'content'=>Keywords::forProp($property)]);
+
 $photoManager = Yii::$app->photoManager;
 ?>
 
@@ -37,7 +40,7 @@ $photoManager = Yii::$app->photoManager;
                     <td class="l">County</td>
                     <td><?=$property->county?></td>
                     <td class="l">State</td>
-                    <td><?=UsStates::$cton[$property->state]?></td>
+                    <td><?=UsStates::cton($property->state)?></td>
                 </tr>
 
                 <tr>

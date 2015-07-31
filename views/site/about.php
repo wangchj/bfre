@@ -3,8 +3,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-$this->title = Yii::$app->name . ' About';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'About Bill Fowler Real Estate';
+$this->registerMetaTag(['name'=>'keywords', 'content'=>'Land for sale in Southeastern United States, 1031 Tax-Differed Exchanges, about, sale inquiries, people, service, Bill Fowler']);
 ?>
 
 <div style="height:300px; overflow:hidden">

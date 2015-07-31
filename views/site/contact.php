@@ -7,7 +7,8 @@ use yii\captcha\Captcha;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\ContactForm */
 
-$this->title = Yii::$app->name . ' Contact';
+$this->title = 'Contact Bill Fowler Real Estate';
+$this->registerMetaTag(['name'=>'keywords', 'content'=>'Sales, offers, buy, questions, inquiries, land sale questions, business, contact, email, form']);
 ?>
 
 <div style="height:300px; overflow:hidden;">

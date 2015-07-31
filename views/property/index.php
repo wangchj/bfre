@@ -4,11 +4,20 @@ use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
 use app\models\PropertyType;
+use app\components\Keywords;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::$app->name . ' Properties';
+$params = Yii::$app->controller->actionParams;
+$state = array_key_exists('state', $params) ? ucfirst($params['state']) : null;
+
+$this->title = ($type ? "$type, land," : "Land") . ' and real estate properties for sale in ' .
+    ($state ? $state : 'Alabama, Georgia, and Tennessee') . ' - Bill Fowler Real Estate';
+
+$this->registerMetaTag(['name'=>'keywords', 'content'=>
+    ($state ? Keywords::forState($state) : ($type ? Keywords::forType($type) : Keywords::forAllProps()))]);
+
 $photoManager = Yii::$app->photoManager;
 
 setlocale(LC_MONETARY, 'en_US');
