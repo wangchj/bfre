@@ -85,8 +85,8 @@ class PropertyController extends Controller
         $activeQuery = Property::find();
 
         if($typeName && $typeName != '') {
-            $type = PropertyType::find()->where(['typeName'=>$typeName])->one();
-            $activeQuery->where('typeId='. $type->typeId);
+            $typeId = PropertyType::find()->where(['typeName'=>$typeName])->one()->typeId;
+            $activeQuery->innerJoinWith('propertyTypeMaps')->where(['typeId'=>$typeId]);
         }
 
         return $this->render('index', ['properties' => $activeQuery->all(), 'type'=>$typeName]);
