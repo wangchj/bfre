@@ -74,7 +74,7 @@ class PropertyController extends Controller
             $activeQuery->andWhere("match(descr,features) against ('$keywords')");
 
         if($state) {
-            $code = UsStates::$ntoc[ucfirst($state)];
+            $code = UsStates::ntoc($state);
             $activeQuery->andWhere("state='$code'");
         }
 
