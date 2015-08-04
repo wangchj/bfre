@@ -12,7 +12,7 @@ use yii\web\AssetBundle;
 /* @var $property app\models\Property */
 
 $this->title = 'Land and real estate properties for sale in Alabama, Georgia, Tennessee, and Southeastern United States - BillFowlerRealEstate.com';
-$this->registerMetaTag(['name'=>'keywords', 'content'=>'land for sale in Alabama, land for sale in Georgia, land for sale in Tennessee, land for sale in Southeastern United States, real estate for sale, commercial properties, development properties for sale, airport, farm land, hunting land, income properties, industrial properties, timber, timberland, investment properties, vineyards, agriculture, agricultural, cotton, county, barn, corral, home, sell, grain, peanuts, subdivision, buyer, seller, 1031 Tax-Differed Exchanges, Alabama, Georgia, Tennessee, Montgomery Alabama']);
+$this->registerMetaTag(['name'=>'keywords', 'content'=>'land for sale in Alabama, land for sale in Georgia, land for sale in Tennessee, land for sale in Southeastern United States, real estate for sale, commercial properties, development properties for sale, airport, farm land, hunting land, income properties, industrial properties, timber, timberland, investment properties, vineyards, agriculture, agricultural, county, golf course, golf, home, sell, grain, multipurpose building, subdivision, buyer, seller, 1031 Tax-Differed Exchanges, Alabama, Georgia, Tennessee, Montgomery Alabama']);
 
 HomeAsset::register($this);
 ?>
