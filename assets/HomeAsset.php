@@ -1,25 +1,17 @@
 <?php
-/**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
- */
-
 namespace app\assets;
 
 use yii\web\AssetBundle;
 
-/**
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
- */
 class HomeAsset extends AssetBundle
 {
     public $sourcePath = '@app/views/site';
-    public $css =['index.css'];
+    public $css =[
+        'http://getbootstrap.com/assets/css/docs.min.css',
+        'index.css'
+    ];
     public $js =
     [
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyD8Ls8RLsCalFAdQ48dPFQL-dEsgs0mF_E&libraries=geometry&sensor=false',
         'index.js'
     ];
     public $depends = [

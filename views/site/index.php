@@ -39,9 +39,15 @@ HomeAsset::register($this);
                 We provide personal care with absolute integrity; and as such is the go-to organization for both sellers and buyers who look for professional high-energy and dedicated expertise that will result in a successful conclusion to their real estate desires or problems.
                 </p>
             </div>
-
-            
         </div><!-- row -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="bs-callout bs-callout-info">
+                    <h4>Looking for something special?</h4>
+                    <p>Tell us what kind of property you are looking for by contacting us, and we will employ a vast list of contacts and resources, obtained through decades in the business, to find what you desire.</p>
+                </div>
+            </div>
+        </div>
     </div><!-- container -->
 </div>
 
