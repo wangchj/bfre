@@ -20,6 +20,6 @@ class PropertyDetailAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapPluginAsset',
-        'app\assets\JssorAsset'
+        'app\assets\FancyboxAsset'
     ];
 }
