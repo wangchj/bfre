@@ -45,12 +45,15 @@ HomeAsset::register($this);
     </div><!-- container -->
 </div>
 
-<div style="background-color:#eeeeee">
+<hr/>
+
+<div style="background-color:#ffffff">
     <div class="container" style="padding-top:25px">
         <div class="row">
             <div class="col-xs-12" style="margin-top:25px">
                 <div class="row">
                     <?php
+                        setlocale(LC_MONETARY, 'en_US');
                         $properties = Property::getRandomProperties(6);
                         foreach($properties as $property):
                     ?>
@@ -67,13 +70,12 @@ HomeAsset::register($this);
                         <div style="clear:both; padding:10px; text-align:center">
                             <a href="<?=Url::to(['property/detail', 'id'=>$property->propId])?>"><?=substr($property->headline, 0, 30)?></a>
                             <br>
-                            <?php
-                                if(strlen($property->descr) > 50)
-                                    echo substr($property->descr, 0, 50) . 
-                                        Html::a(' more..', ['property/detail', 'id'=>$property->propId]);
-                                else
-                                    echo $property->descr;
-                            ?>
+                            <span style="font-size:0.9em"><?=$property->city ? $property->city : $property->county?>, <?=$property->state?></span>
+                            <br>
+                            <span style="font-size:0.9em">
+                                <?=$property->acres?> acres |
+                                <?=$property->priceAcre ? '$' . number_format($property->priceAcre) . ' per acre' : '$' . number_format($property->priceTotal)?>
+                            </span>
                         </div>
                     </div>
                     <?php endforeach;?>
