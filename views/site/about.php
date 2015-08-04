@@ -8,7 +8,7 @@ $this->registerMetaTag(['name'=>'keywords', 'content'=>'Land for sale in Southea
 ?>
 
 <div style="height:300px; overflow:hidden">
-    <img style="width:100%; position:relative; top:-230px; min-width:1187px" src="http://www.ncwine.org/img/_home/_gallery/feb_time_wine.jpg">
+    <img style="width:100%; position:relative; top:-290px; left:0px; min-width:1268px" src="http://billfowlerrealestate.com/photos/54d929b016cdf/106_2392.JPG">
 </div>
 
 <div class="container" style="padding-top:0px">
