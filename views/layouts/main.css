@@ -37,7 +37,13 @@ nav.navbar {
 }
 
 .navbar-default .navbar-header button {
-    margin: 25px;
+    margin: 25px 25px 25px 0px;
+}
+
+@media (min-width: 768px) {
+    .navbar-brand {
+        margin-right:50px;
+    }
 }
 
 .top-toolbar {

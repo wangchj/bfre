@@ -37,7 +37,7 @@ LayoutAsset::register($this);
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?=Url::to(['site/index'])?>" style="font-family:'Times New Roman','Times'; color:#555555; font-weight:bold; margin-right:50px">
+                    <a class="navbar-brand" href="<?=Url::to(['site/index'])?>" style="font-family:'Times New Roman','Times'; color:#555555; font-weight:bold">
                             <div style="font-family:'Times New Roman','Times'; font-weight:bold; color:#555555">
                                 <span style="font-size:32px">B</span><span style="font-size:28px">ILL</span>
                                 <span style="font-size:32px">F</span><span style="font-size:28px">OWLER</span>
