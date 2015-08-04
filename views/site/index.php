@@ -19,7 +19,7 @@ HomeAsset::register($this);
 
 <div style="height:300px; overflow:hidden">
     <!-- img style="width:100%; position:relative; top:-220px" src="http://www.jellystonemaryland.com/Websites/jsmd/images/MarylandVineyard.jpg" -->
-    <img style="width:100%; position:relative; top:-220px; left:0px; min-width:1268px" src="http://www.ednavalleyvineyard.com/sites/default/files/homepage-slides/slide_2.jpg">
+    <img style="width:100%; position:relative; top:-290px; left:0px; min-width:1268px" src="http://billfowlerrealestate.com/photos/54d929b016cdf/106_2392.JPG">
 </div>
 
 <div>
