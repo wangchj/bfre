@@ -46,7 +46,8 @@ $photoManager = Yii::$app->photoManager;
             <div class="col-xs-6 col-sm-3">
                 <a class="fancybox" rel="group" href="<?=$photoManager->getUrl($photo)?>">
                     <div class="" style="
-                        background-image: url(<?=$photoManager->getUrl($photo)?>);
+                        background-image: 
+url('<?=$photoManager->getUrl($photo)?>');
                         background-size:cover;
                         background-position: center center;
                         background-repeat: no-repeat;
