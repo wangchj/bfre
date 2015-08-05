@@ -13,6 +13,8 @@ class PhotoManager extends Component
 
     public function getUrl($path)
     {
+        $path = trim($path);
+
         if(!Url::isRelative($path))
             return $path;
 
