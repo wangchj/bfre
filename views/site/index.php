@@ -60,7 +60,7 @@ HomeAsset::register($this);
                 <div class="row">
                     <?php
                         setlocale(LC_MONETARY, 'en_US');
-                        $properties = Property::getRandomProperties(6);
+                        $properties = Property::getRandActiveProps(6);
                         foreach($properties as $property):
                     ?>
                     <div class="col-sm-4" style="margin-bottom:20px;">

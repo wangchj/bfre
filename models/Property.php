@@ -112,20 +112,15 @@ class Property extends \yii\db\ActiveRecord
     //}
 
     /**
-     * Gets an array of random Property objects of size $count from the database. If the table size is less
+     * Gets an array of random active Property objects of size $count from the database. If the table size is less
      * than $count, all records are returned.
      * @param integer $count the number of objects to be returned.
      * @return An array
      */
-    public static function getRandomProperties($count)
+    public static function getRandActiveProps($count)
     {
-        $tbSize = Property::find()->count();
-        
-        if($tbSize <= $count)
-            return Property::find()->all();
-
-        $offset = rand(0, $tbSize - $count);
-        return Property::find()->offset($offset)->limit($count)->all();
+        $randName = Yii::$app->db->driverName == 'sqlite' ? 'random()' : 'rand()';
+        return Property::find()->where(['status'=>'active'])->limit($count)->orderBy($randName)->all();
     }
 
     /**
