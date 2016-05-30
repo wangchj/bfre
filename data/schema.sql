@@ -23,6 +23,7 @@ create table Properties (
     acres       float           not null,
     priceAcre   float           null,       -- price per acres
     priceTotal  float           null,       -- total price
+    status      varchar(20)     not null default 'active',
     fulltext(descr, features)
 ) ENGINE=MyISAM;
 

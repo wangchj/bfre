@@ -22,6 +22,7 @@ use Yii;
  * @property double $acres
  * @property double $priceAcre
  * @property double $priceTotal
+ * @property string $status
  *
  * @property PropertyTypeMap[] $propertyTypeMaps
  * @property PropertyType[] $types
@@ -45,7 +46,7 @@ class Property extends \yii\db\ActiveRecord
             [['county', 'state', 'latlon', 'headline', 'descr', 'acres'], 'required'],
             [['latlon', 'bound', 'descr', 'features', 'keywords', 'pictures', 'priceAcre', 'priceTotal'], 'string'],
             [['address'], 'string', 'max' => 40],
-            [['city', 'county'], 'string', 'max' => 20],
+            [['city', 'county', 'status'], 'string', 'max' => 20],
             [['state'], 'string', 'max' => 2],
             [['headline'], 'string', 'max' => 100]
         ];
@@ -72,7 +73,8 @@ class Property extends \yii\db\ActiveRecord
             'acres' => 'Acreage',
             'priceAcre' => 'Price Per Acre',
             'priceTotal' => 'Total Price',
-            'typeList' => 'Property Type'
+            'typeList' => 'Property Type',
+            'status' => 'Status'
         ];
     }
 
