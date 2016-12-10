@@ -75,8 +75,10 @@ setlocale(LC_MONETARY, 'en_US');
                                     <div class="col-xs-4" style="text-align:right">
                                         <?php if($property->priceAcre != null):?>
                                             $<?=number_format($property->priceAcre)?> per acre
-                                        <?php else:?>
+                                        <?php elseif($property->priceTotal != null):?>
                                             $<?=number_format($property->priceTotal)?>
+                                        <?php else:?>
+                                            Call for info
                                         <?php endif;?>
                                     </div>
                                 </div>

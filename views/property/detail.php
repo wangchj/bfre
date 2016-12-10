@@ -36,7 +36,7 @@ $photoManager = Yii::$app->photoManager;
         </div>
         
         <div class="col-xs-4" style="text-align:right">
-            <?=$property->priceAcre ? '$' . number_format($property->priceAcre) . ' per acre' : '$' . number_format($property->priceTotal)?>
+            <?=$property->priceAcre ? '$' . number_format($property->priceAcre) . ' per acre' : $property->priceTotal ? '$' . number_format($property->priceTotal) : ''?>
         </div>
     </div>
 
@@ -127,12 +127,10 @@ url('<?=$photoManager->getUrl($photo)?>');
                         <td><?=$property->priceAcre?></td>
                     </tr>
                 <?php endif;?>
-                <?php if($property->priceTotal):?>
-                    <tr>
-                        <th>Price Total</th>
-                        <td><?=$property->priceTotal?></td>
-                    </tr>
-                <?php endif;?>
+                <tr>
+                    <th>Price</th>
+                    <td><?=$property->priceTotal ? $property->priceTotal : 'Call for info'?></td>
+                </tr>
             </table>
         </div>
     </div>
