@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Markdown;
 use yii\widgets\DetailView;
 use app\assets\PropertyDetailAsset;
 use app\components\geonames\UsStates;
@@ -64,7 +65,7 @@ url('<?=$photoManager->getUrl($photo)?>');
 
     <div class="row">
         <div class="col-sm-12">
-            <?=nl2br($property->descr)?>
+            <?=Markdown::process($property->descr)?>
         </div>
     </div>
 
@@ -73,7 +74,7 @@ url('<?=$photoManager->getUrl($photo)?>');
         <div class="row">
             <div class="col-sm-12">
                 <h2>Special Features</h2>
-                <?=nl2br($property->features)?>
+                <?=Markdown::process($property->features)?>
             </div>
         </div>
     <?php endif;?>
