@@ -118,7 +118,7 @@ url('<?=$photoManager->getUrl($photo)?>');
                     <td><?=$property->getTypeStr()?></td>
                 </tr>
                 <tr>
-                    <th>Acreages</th>
+                    <th>Acreage</th>
                     <td><?=$property->acres?></td>
                 </tr>
                 <?php if($property->priceAcre):?>
