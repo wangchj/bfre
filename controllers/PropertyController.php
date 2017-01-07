@@ -78,6 +78,8 @@ class PropertyController extends Controller
             $activeQuery->andWhere("state='$code'");
         }
 
+        $activeQuery->andWhere("status='active'");
+        
         return $this->render('index', ['properties' => $activeQuery->all(), 'type'=>$typeName]);
     }
 
